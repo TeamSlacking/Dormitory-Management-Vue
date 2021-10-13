@@ -278,7 +278,7 @@ export const AdminManagement = {
         },
         // 批量删除
         delBatch() {
-            this.data.forEach((v) => v.checked && (v.deleted = true));
+            this.selectedIds.forEach(this.del)
         },
         // 添加数据
         addPerson() {
