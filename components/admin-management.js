@@ -20,21 +20,19 @@ data.people.forEach(person => person.phone = String(person.phone))
  * @param {typeof data.people[0]} person
  */
 function validatePerson({ id, name, gender, phone, dormitory, username }) {
-    // if (name == "") {
-    //     throw Error("所填的名字不合法");
-    // }
-    // if (!genders.includes(gender)) {
-    //     throw Error("所填的性别不合法");
-    // }
-    // if (typeof phone !== "number" || isNaN(phone) || !isFinite(phone) || !Number.isInteger(phone)) {
-    //     throw Error("所填的电话号码不合法");
-    // }
-    // if (!dormitories.includes(dormitory)) {
-    //     throw Error("所填的宿舍楼不合法");
-    // }
-    // if (username == "") {
-    //     throw Error("所填的用户名不合法");
-    // }
+    if (name == "") {
+        throw Error("所填的名字不合法");
+    }
+    phone = Number(phone)
+    if (isNaN(phone) || !isFinite(phone) || !Number.isInteger(phone)) {
+        throw Error("所填的电话号码不合法");
+    }
+    if (!dormitories.includes(dormitory)) {
+        throw Error("所填的宿舍楼不合法");
+    }
+    if (username == "") {
+        throw Error("所填的用户名不合法");
+    }
 }
 
 /** 空数据 */
@@ -97,7 +95,11 @@ export const AdminManagement = {
                             <tbody class="text-center">
                                 <!-- 渲染数据 -->
                                 <template v-for="(profile, index) in viewData">
-                                    <table-row :profile="profile" :key="profile.id"/>
+                                    <table-row :profile="profile" :key="profile.id" @del="del">
+                                        <template v-slot:checkbox>
+                                                <input type="checkbox" v-model="selectedIds" :value="profile.id" />
+                                        </template>
+                                    </table-row>
                                 </template>
                                 <!-- 添加数据栏 -->
                                 <tr v-if="addModel">
@@ -174,9 +176,9 @@ export const AdminManagement = {
                         </nav>
                         <div class="col-md-1">
                             <select v-model="pageSize" class="form-control" style="width: auto">
-                                <option value="5">5</option>
-                                <option value="10">10</option>
-                                <option value="20">20</option>
+                                <option :value="5">5</option>
+                                <option :value="10">10</option>
+                                <option :value="20">20</option>
                             </select>
                         </div>
                     </div>
@@ -193,13 +195,17 @@ export const AdminManagement = {
         pageSize: 5,                // 页面显示数据量
         addModel: false,            // 是否开启添加数据栏
         newData: { ...emptyPerson }, // 新数据存储对象
+        selectedIds: [],
         searchForm: {
             name: "",             // 名字搜索框
             phone: undefined,     // 电话搜索框
             gender: 0,           // 性别搜索框
             dormitory: "",        // 宿舍搜索框
-        }
+        },
     }),
+    mounted() {
+        console.log("this", this)
+    },
     computed: {
         // 计算总页数
         totalPage() {
@@ -217,11 +223,8 @@ export const AdminManagement = {
         filteredData() {
             return this.data.filter(
                 (v) =>
-                    !v.deleted &&
                     v.name.includes(this.searchForm.name) &&
-                    (this.searchForm.phone ?
-                        String(v.phone).includes(String(this.searchForm.phone)) :
-                        true) &&
+                    (this.searchForm.phone ? v.phone.includes(this.searchForm.phone) : true) &&
                     (this.searchForm.gender == 0 || this.searchForm.gender == v.gender) &&
                     v.dormitory.includes(this.searchForm.dormitory)
             );
@@ -236,15 +239,14 @@ export const AdminManagement = {
         allChecked: {
             // 如果当前表格显示的数据被全部勾选，则全选 checkbox 也会自动勾上
             get() {
-                return this.viewData.every((v) => v.checked);
+                return this.selectedIds.length === this.pageSize
             },
             set(value) {
                 if (value) {
-                    // 如果 checkbox 被选中，则勾选显示页面中的所有数据
-                    this.viewData.forEach((v) => (v.checked = true));
+                    this.selectedIds = this.viewData.map(v => v.id)
                 } else {
                     // 如果 checkbox 被取消选中，则取消勾选所有数据
-                    this.data.forEach((v) => (v.checked = false));
+                    this.selectedIds = [];
                 }
             },
         },
@@ -253,11 +255,13 @@ export const AdminManagement = {
     watch: {
         pageSize() {
             this.currentPage = 1;
+            this.selectedIds = [];
         },
         searchForm: {
             deep: true,
             handler() {
                 this.currentPage = 1;
+                this.selectedIds = [];
             },
         },
         // 页面需要显示的数据发生变动，取消所有勾选项
@@ -268,6 +272,10 @@ export const AdminManagement = {
         },
     },
     methods: {
+        del(id) {
+            const index = this.data.findIndex(p => p.id === id)
+            Vue.delete(this.data, index)
+        },
         // 批量删除
         delBatch() {
             this.data.forEach((v) => v.checked && (v.deleted = true));

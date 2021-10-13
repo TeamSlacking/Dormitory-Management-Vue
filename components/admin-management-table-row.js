@@ -4,7 +4,7 @@ export const TableRow = {
     template: `
         <tr>
             <td>
-                <input type='checkbox' v-model="profile.checked">
+                <slot name="checkbox"></slot>
             </td>
             <td>
                 <span>{{ profile.id }}</span>
@@ -18,7 +18,7 @@ export const TableRow = {
                 <td>
                     <div>
                         <button type="button" class="btn btn-outline-primary" @click="editMode = true" >Edit</button>
-                        <button type="button" class="btn btn-outline-danger" @click="profile.deleted = true" >Del</button>
+                        <button type="button" class="btn btn-outline-danger" @click="del(profile.id)">Del</button>
                     </div>
                 </td>
             </template>
@@ -61,8 +61,10 @@ export const TableRow = {
         dormitories,        // 宿舍楼列表
         editMode: false,    // 显示编辑框
         originProfile: null,
+        isChecked: false,
     }),
     mounted() {
+        this.isChecked = this.isSelected;
         this.originProfile = { ...this.profile };
     },
     methods: {
@@ -79,6 +81,9 @@ export const TableRow = {
         cancel() {
             this.editMode = false;
             Object.assign(this.profile, this.originProfile);
+        },
+        del(id) {
+            this.$emit("del", id)
         },
     },
 };
