@@ -1,0 +1,60 @@
+.navbar {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.navbar-nav {
+    position: absolute;
+    right: 80px;
+}
+
+.navbar-img {
+    width: 40px;
+}
+
+.navbar-text {
+    text-align: center;
+}
+
+.breadcrumb {
+    margin: 6px;
+    background-color: transparent;
+}
+
+.home-box {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.list-group {
+    margin-top: 30px;
+}
+
+.jumbotron {
+    margin-top: 30px;
+    background-color: white;
+    border: 1px solid #ededed;
+    padding-top: 30px;
+}
+
+.list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.carousel-control-prev {
+    background-color: transparent;
+    border: 0;
+}
+
+.carousel-control-next {
+    background-color: transparent;
+    border: 0;
+}
