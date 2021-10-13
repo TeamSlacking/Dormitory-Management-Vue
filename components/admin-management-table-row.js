@@ -1,0 +1,84 @@
+import { dormitories } from "../utils/dormitories.js";
+
+export const TableRow = {
+    template: `
+        <tr>
+            <td>
+                <input type='checkbox' v-model="profile.checked">
+            </td>
+            <td>
+                <span>{{ profile.id }}</span>
+            </td>
+            <template v-if="!editMode">
+                <td><span>{{ profile.name }}</span></td>
+                <td><span>{{ profile.gender == 1 ? "男" : "女" }}</span></td>
+                <td><span>{{ profile.phone }}</span></td>
+                <td><span>{{ profile.dormitory }}</span></td>
+                <td><span>{{ profile.username }}</span></td>
+                <td>
+                    <div>
+                        <button type="button" class="btn btn-outline-primary" @click="editMode = true" >Edit</button>
+                        <button type="button" class="btn btn-outline-danger" @click="profile.deleted = true" >Del</button>
+                    </div>
+                </td>
+            </template>
+            <template v-else>
+                <td>
+                    <input v-model="profile.name" class="form-control" type="text" style="width: 83px;"/>
+                </td>
+                <td>
+                    <select v-model="profile.gender" class="form-control" style="width: 63px;">
+                        <option value="1">男</option>
+                        <option value="2">女</option>
+                    </select>
+                </td>
+                <td>
+                    <input v-model="profile.phone" class="form-control" type="number" style="width: 145px;"/>
+                </td>
+                <td>
+                    <select v-model="profile.dormitory" class="form-control" style="width: 122px;">
+                        <option value="">请选择宿舍楼</option>
+                        <option v-for="dormitory in dormitories" :value="dormitory">{{ dormitory }}</option>
+                    </select>
+                </td>
+                <td><input v-model="profile.username" class="form-control" type="text" style="width: 121px;"/></td>
+                <td>
+                    <div>
+                        <button type="button" class="btn btn-outline-primary mb-2" @click="save()">Save</button>
+                        <button type="button" class="btn btn-outline-danger mb-2" @click="cancel()">Cancel</button>
+                    </div>
+                </td>
+            </template>
+        </tr>
+    `,
+    props: {
+        profile: {
+            type: Object,
+            required: true,
+        },
+    },
+    data: () => ({
+        dormitories,        // 宿舍楼列表
+        editMode: false,    // 显示编辑框
+        originProfile: null,
+    }),
+    mounted() {
+        this.originProfile = { ...this.profile };
+    },
+    methods: {
+        save() {
+            try {
+                validatePerson(this.profile);   // 验证数据
+            } catch (error) {
+                alert(error.message);           // 如果数据又不合法项，弹框提示
+                return;
+            }
+            this.editMode = false;              // 隐藏编辑栏
+            originProfile = { ...this.profile };
+        },
+        cancel() {
+            this.editMode = false;
+            Object.assign(this.profile, this.originProfile);
+        },
+    },
+};
