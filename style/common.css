@@ -1,4 +1,5 @@
-/**
-    公共部分css
-    
-**/
+/** 公共部分css **/
+
+[v-cloak] {
+  display: none;
+}

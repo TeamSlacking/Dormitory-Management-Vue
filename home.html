@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="public/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="style/home.css">
+    <link rel="stylesheet" href="./style/common.css">
     <script src="public/js/jquery.js"></script>
     <script src="public/bootstrap/js/bootstrap.js"></script>
     <script src="public/js/mock.js"></script>
@@ -19,7 +20,7 @@
 </head>
 
 <body>
-    <div id="app">
+    <div id="app" v-cloak>
         <!-- 头部开始 -->
         <header>
             <!-- 左边 -->
@@ -37,7 +38,8 @@
                     <!-- 头像 -->
                     <ul class="navbar-nav navbar-nav-right">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                                aria-expanded="false">
                                 <img class="avatar p-1 navbar-img rounded-circle" src="./img/diana.jpg" alt="Hz1">
                             </a>
                             <!-- 点击头像弹出 -->
@@ -59,72 +61,27 @@
                 <!-- 左边开始 -->
                 <div class="col-md-2">
                     <div class="list-group">
-                        <button type="button" class="list-group-item list-group-item-action active" onclick="admin_Home()">主页 <i class="bi bi-chevron-right"></i></button>
-                        <button type="button" class="list-group-item list-group-item-action" onclick="admin_Mag()">宿舍管理员管理 <i class="bi bi-chevron-right"></i></button>
-                        <button type="button" class="list-group-item list-group-item-action" onclick="admin_Smag()">学生管理 <i class="bi bi-chevron-right"></i></button>
-                        <button type="button" class="list-group-item list-group-item-action" onclick="admin_DBM()">宿舍楼管理 <i class="bi bi-chevron-right"></i></button>
-                        <button type="button" class="list-group-item list-group-item-action" onclick="admin_Abr()">缺勤记录 <i class="bi bi-chevron-right"></i></button>
-                        <button type="button" class="list-group-item list-group-item-action" onclick="admin_Cp()">修改密码 <i class="bi bi-chevron-right"></i></button>
+                        <button type="button" class="list-group-item list-group-item-action active"
+                            onclick="admin_Home()">主页 <i class="bi bi-chevron-right"></i></button>
+                        <button type="button" class="list-group-item list-group-item-action"
+                            onclick="admin_Mag()">宿舍管理员管理 <i class="bi bi-chevron-right"></i></button>
+                        <button type="button" class="list-group-item list-group-item-action" onclick="admin_Smag()">学生管理
+                            <i class="bi bi-chevron-right"></i></button>
+                        <button type="button" class="list-group-item list-group-item-action" onclick="admin_DBM()">宿舍楼管理
+                            <i class="bi bi-chevron-right"></i></button>
+                        <button type="button" class="list-group-item list-group-item-action" onclick="admin_Abr()">缺勤记录
+                            <i class="bi bi-chevron-right"></i></button>
+                        <button type="button" class="list-group-item list-group-item-action" onclick="admin_Cp()">修改密码
+                            <i class="bi bi-chevron-right"></i></button>
                     </div>
                 </div>
                 <!-- 左边结束 -->
                 <!-- 其余内容开始 -->
-                <div class="col-10">
-                    <div class="jumbotron">
-                        <h3 class="card-title">欢迎您，系统管理员</h3>
-                        <div class="card">
-                            <!-- 其余页面修改从这里开始直接注释下面的轮播图 -->
-                            <!-- 表格标题 -->
-                            <!-- <div class="card-header"> -->
-                            <!-- 轮播图开始 -->
-                            <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
-                                <ol class="carousel-indicators">
-                                    <li data-target="#carouselExampleInterval" data-slide-to="0" class="active"></li>
-                                    <li data-target="#carouselExampleInterval" data-slide-to="1"></li>
-                                </ol>
-                                <div class=" carousel-inner ">
-                                    <div class="carousel-item active " data-interval="3000 ">
-                                        <img src="./img/1.svg " class="image" style="height: 300px;">
-                                    </div>
-                                    <div class="carousel-item " data-interval="3000 ">
-                                        <img src="./img/3.svg " class="image" style="height: 300px;">
-                                    </div>
-                                    <button class="carousel-control-prev" type="button" data-target="#carouselExampleInterval" data-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="false"></span>
-                                    </button>
-                                    <button class="carousel-control-next" type="button" data-target="#carouselExampleInterval" data-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    </button>
-                                </div>
-                            </div>
-                            <!-- 轮播图结束 -->
-                            <!-- </div> 表格标题尾部div-->
-                            <!-- 表格主体 -->
-                            <!-- <div class="card-body">
-
-                            </div> 表格主体尾部div-->
-                        </div>
-                    </div>
-                </div>
+                <!-- <admin-management></admin-management> -->
+                <index-welcome></index-welcome>
             </div>
         </div>
-    </div>
 </body>
-<script>
-    let app = new Vue({
-        el: '#app',
-        data() {
-            return {
-
-            }
-        },
-        methods: {
-
-        },
-        computed: {
-
-        },
-    })
-</script>
+<script type="module" src="./controller/home.js"></script>
 
 </html>
