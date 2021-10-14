@@ -1,3 +1,5 @@
+import { menu } from "../utils/menu.js";
+
 const app = new Vue({
     el: '#app',
     data: {
@@ -57,6 +59,7 @@ const app = new Vue({
                         localStorage.removeItem("login_username");
                         localStorage.removeItem("login_password");
                     }
+                    sessionStorage.setItem("menu", JSON.stringify(menu));
                     location.href = 'home.html'
                 } else {
                     swal({
