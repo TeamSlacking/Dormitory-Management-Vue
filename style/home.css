@@ -72,3 +72,13 @@ body {
     background-color: transparent;
     border: 0;
 }
+
+.home-change-password-input {
+    width: 300px;
+}
+
+.home-change-password-center {
+    display: flex;
+    justify-content: center;
+    padding: 8.5px;
+}
