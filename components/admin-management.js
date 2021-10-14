@@ -11,7 +11,7 @@ let data = Mock.mock({
         phone: "@integer(13000000000, 19999999999)",
         "dormitory|1": dormitories,
         username: "@word",
-    },],
+    }, ],
 });
 
 data.people.forEach(person => person.phone = String(person.phone))
@@ -33,9 +33,9 @@ export const AdminManagement = {
     template: `
     <div class="col-md-10">
         <div class="jumbotron">
-            <h3 class="contain">Administrator Management</h3>
+            <h3 class="contain">宿舍管理员管理</h3>
             <div class="card">
-                <div class="card-header">
+                <div class="card-header index-card-header">
                     <!-- 搜索栏 -->
                     <form action="#" id="search_form" class="form-inline">
                         <div class="mb-2 mr-sm-2">
@@ -59,8 +59,8 @@ export const AdminManagement = {
                         </div>
                     </form>
                     <div style="float: right">
-                        <button type="button" class="btn btn-sm btn-outline-success" @click="addModel = true">Add</button>
-                        <button type="button" class="btn btn-sm btn-outline-danger" @click="delBatch()">BatchDel</button>
+                        <button type="button" class="btn btn-md btn-outline-success" @click="addModel = true">添加</button>
+                        <button type="button" class="btn btn-md btn-outline-danger" @click="delBatch()">批量删除</button>
                     </div>
                 </div>
 
@@ -103,8 +103,8 @@ export const AdminManagement = {
                                     <td><input v-model="newData.username " class="form-control" type="text" style="width: 121px" /></td>
                                     <td>
                                         <div class="btn-group" role="group">
-                                            <button type="button" class="btn btn-outline-primary" @click="addPerson()">Add</button>
-                                            <button type="button" class="btn btn-outline-danger" @click="addCancel()">Canel</button>
+                                            <button type="button" class="btn btn-outline-primary" @click="addPerson()">添加</button>
+                                            <button type="button" class="btn btn-outline-danger" @click="addCancel()">取消</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -169,19 +169,19 @@ export const AdminManagement = {
     </div>
     `,
     data: () => ({
-        dormitories,                // 宿舍楼列表
-        header: ["序号", "姓名", "性别", "电话", "宿舍楼", "用户名", "操作"],   // 表头
-        data: data.people,          // mock.js 生成的数据
-        currentPage: 1,             // 当前页码
-        pageSize: 5,                // 页面显示数据量
-        addModel: false,            // 是否开启添加数据栏
-        newData: { ...emptyPerson }, // 新数据存储对象
+        dormitories, // 宿舍楼列表
+        header: ["序号", "姓名", "性别", "电话", "宿舍楼", "用户名", "操作"], // 表头
+        data: data.people, // mock.js 生成的数据
+        currentPage: 1, // 当前页码
+        pageSize: 5, // 页面显示数据量
+        addModel: false, // 是否开启添加数据栏
+        newData: {...emptyPerson }, // 新数据存储对象
         selectedIds: [],
         searchForm: {
-            name: "",             // 名字搜索框
-            phone: undefined,     // 电话搜索框
-            gender: 0,           // 性别搜索框
-            dormitory: "",        // 宿舍搜索框
+            name: "", // 名字搜索框
+            phone: undefined, // 电话搜索框
+            gender: 0, // 性别搜索框
+            dormitory: "", // 宿舍搜索框
         },
     }),
     computed: {
@@ -201,10 +201,10 @@ export const AdminManagement = {
         filteredData() {
             return this.data.filter(
                 (v) =>
-                    v.name.includes(this.searchForm.name) &&
-                    (this.searchForm.phone ? v.phone.includes(this.searchForm.phone) : true) &&
-                    (this.searchForm.gender == 0 || this.searchForm.gender == v.gender) &&
-                    v.dormitory.includes(this.searchForm.dormitory)
+                v.name.includes(this.searchForm.name) &&
+                (this.searchForm.phone ? v.phone.includes(this.searchForm.phone) : true) &&
+                (this.searchForm.gender == 0 || this.searchForm.gender == v.gender) &&
+                v.dormitory.includes(this.searchForm.dormitory)
             );
         },
         // 显示当前页码在的数据
@@ -261,20 +261,20 @@ export const AdminManagement = {
         // 添加数据
         addPerson() {
             try {
-                validateAdmin(this.newData)    // 验证数据
+                validateAdmin(this.newData) // 验证数据
             } catch (error) {
-                alert(error.message)            // 如果数据又不合法项，弹框提示
+                alert(error.message) // 如果数据又不合法项，弹框提示
                 return
             }
-            this.addModel = false;  // 隐藏添加数据栏
+            this.addModel = false; // 隐藏添加数据栏
             this.newData.id = this.data[this.data.length - 1].id + 1;
-            this.data.push(this.newData);       // 添加新数据
-            this.newData = { ...emptyPerson };   // 清空添加数据栏内容
+            this.data.push(this.newData); // 添加新数据
+            this.newData = {...emptyPerson }; // 清空添加数据栏内容
         },
         // 取消添加
         addCancel() {
-            this.addModel = false;              // 隐藏添加数据栏
-            this.newData = { ...emptyPerson };   // 清空添加数据栏内容
+            this.addModel = false; // 隐藏添加数据栏
+            this.newData = {...emptyPerson }; // 清空添加数据栏内容
         },
     },
 };

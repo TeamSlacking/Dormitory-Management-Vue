@@ -23,6 +23,13 @@ body {
     text-align: center;
 }
 
+.index-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-content: space-around;
+    align-items: center;
+}
+
 .breadcrumb {
     margin: 6px;
     background-color: transparent;
