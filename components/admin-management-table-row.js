@@ -18,8 +18,8 @@ export const TableRow = {
                 <td><span>{{ profile.username }}</span></td>
                 <td>
                     <div>
-                        <button type="button" class="btn btn-outline-primary" @click="editMode = true" >Edit</button>
-                        <button type="button" class="btn btn-outline-danger" @click="del(profile.id)">Del</button>
+                        <button type="button" class="btn btn-outline-primary" @click="editMode = true" >编辑</button>
+                        <button type="button" class="btn btn-outline-danger" @click="del(profile.id)">删除</button>
                     </div>
                 </td>
             </template>
@@ -45,8 +45,8 @@ export const TableRow = {
                 <td><input v-model="profile.username" class="form-control" type="text" style="width: 121px;"/></td>
                 <td>
                     <div>
-                        <button type="button" class="btn btn-outline-primary mb-2" @click="save()">Save</button>
-                        <button type="button" class="btn btn-outline-danger mb-2" @click="cancel()">Cancel</button>
+                        <button type="button" class="btn btn-outline-primary mb-2" @click="save()">保存</button>
+                        <button type="button" class="btn btn-outline-danger mb-2" @click="cancel()">取消</button>
                     </div>
                 </td>
             </template>
@@ -59,25 +59,25 @@ export const TableRow = {
         },
     },
     data: () => ({
-        dormitories,        // 宿舍楼列表
-        editMode: false,    // 显示编辑框
+        dormitories, // 宿舍楼列表
+        editMode: false, // 显示编辑框
         originProfile: null,
         isChecked: false,
     }),
     mounted() {
         this.isChecked = this.isSelected;
-        this.originProfile = { ...this.profile };
+        this.originProfile = {...this.profile };
     },
     methods: {
         save() {
             try {
-                validateAdmin(this.profile);   // 验证数据
+                validateAdmin(this.profile); // 验证数据
             } catch (error) {
-                alert(error.message);           // 如果数据又不合法项，弹框提示
+                alert(error.message); // 如果数据又不合法项，弹框提示
                 return;
             }
-            this.editMode = false;              // 隐藏编辑栏
-            this.originProfile = { ...this.profile };
+            this.editMode = false; // 隐藏编辑栏
+            this.originProfile = {...this.profile };
         },
         cancel() {
             this.editMode = false;
