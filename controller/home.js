@@ -5,6 +5,7 @@ const app = new Vue({
     data: () => ({
         menu,
         viewName: "主页",
+        userinfo: JSON.parse(sessionStorage.getItem("userinfo")),
     }),
     methods: {},
     computed: {
@@ -12,6 +13,17 @@ const app = new Vue({
             const item = menu.find((item) => item.name === this.viewName);
             return item.component ?? IndexWelcome;
         },
+        Welcome(){
+            if(this.userinfo.type == 0){
+                return "欢迎您，系统管理员";
+            } else if (this.userinfo.type == 1){
+                return "欢迎您，宿舍管理员";
+            }else if (this.userinfo.type == 2){
+                return "欢迎您，同学";
+            }else {
+                return "非法访问！"
+            }
+        }
     },
     watch: {
         viewName(value) {
@@ -23,5 +35,5 @@ const app = new Vue({
         if (viewName) {
             this.viewName = viewName
         }
-    }
+    },
 });

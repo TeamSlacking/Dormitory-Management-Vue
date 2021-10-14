@@ -3,6 +3,7 @@ import { menu } from "../utils/menu.js";
 const app = new Vue({
     el: '#app',
     data: {
+        userinfo: JSON.parse(sessionStorage.getItem("userinfo")),
         loginForm: {
             Login_username: localStorage.getItem("login_username") || '',
             Login_password: localStorage.getItem("login_password") || '',
@@ -60,6 +61,8 @@ const app = new Vue({
                         localStorage.removeItem("login_password");
                     }
                     sessionStorage.setItem("menu", JSON.stringify(menu));
+                    delete this.loginForm.Login_password;
+                    sessionStorage.setItem("userinfo", JSON.stringify(this.loginForm))
                     location.href = 'home.html'
                 } else {
                     swal({
@@ -86,6 +89,6 @@ const app = new Vue({
         }
     },
     computed: {
-
+        
     },
 })
