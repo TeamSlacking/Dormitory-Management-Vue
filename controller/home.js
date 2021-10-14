@@ -46,4 +46,15 @@ const app = new Vue({
             return item.component ?? IndexWelcome;
         },
     },
+    watch: {
+        viewName(value) {
+            sessionStorage.setItem("lastView", value)
+        }
+    },
+    mounted() {
+        const viewName = sessionStorage.getItem("lastView")
+        if (viewName) {
+            this.viewName = viewName
+        }
+    }
 });
