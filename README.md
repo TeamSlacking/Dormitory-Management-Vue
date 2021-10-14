@@ -1,7 +1,7 @@
 <!-- TOC -->
 
 - [项目结构（参考）](#%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E5%8F%82%E8%80%83)
-- [CSS类名要求](#%E9%A3%8E%E6%A0%BC%E6%8C%87%E5%8D%97)
+- [CSS 类名要求](#css-%E7%B1%BB%E5%90%8D%E8%A6%81%E6%B1%82)
     - [单文件组件文件的大小写](#%E5%8D%95%E6%96%87%E4%BB%B6%E7%BB%84%E4%BB%B6%E6%96%87%E4%BB%B6%E7%9A%84%E5%A4%A7%E5%B0%8F%E5%86%99)
     - [紧密耦合的组件名](#%E7%B4%A7%E5%AF%86%E8%80%A6%E5%90%88%E7%9A%84%E7%BB%84%E4%BB%B6%E5%90%8D)
     - [组件要求在模块系统中局部注册](#%E7%BB%84%E4%BB%B6%E8%A6%81%E6%B1%82%E5%9C%A8%E6%A8%A1%E5%9D%97%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%B1%80%E9%83%A8%E6%B3%A8%E5%86%8C)
@@ -102,6 +102,7 @@ import { TableRow } from "./admin-management-table-row.js";
 
 // 注意导出的组件命名为大写字母开头
 export const AdminManagement = {
+  name: "admin-management",
   components: {
     "table-row": TableRow,
   },
