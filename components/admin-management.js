@@ -217,7 +217,7 @@ export const AdminManagement = {
         allChecked: {
             // 如果当前表格显示的数据被全部勾选，则全选 checkbox 也会自动勾上
             get() {
-                return this.selectedIds.length === this.pageSize
+                return this.viewData.length === 0 ? false : this.selectedIds.length === this.viewData.length
             },
             set(value) {
                 if (value) {
