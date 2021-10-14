@@ -1,5 +1,6 @@
 import { TableRow } from "./admin-management-table-row.js";
 import { dormitories } from "../utils/dormitories.js";
+import { validateAdmin } from "../utils/validator.js"
 
 /** @type {{people:{id: number; name: string; gender: 1 | 2; phone: string; dormitory: string, username: string}[]}} */
 let data = Mock.mock({
@@ -7,33 +8,13 @@ let data = Mock.mock({
         "id|+1": 1,
         name: "@cname",
         "gender|1": [1, 2],
-        phone: "@integer(10000000000, 19999999999)",
+        phone: "@integer(13000000000, 19999999999)",
         "dormitory|1": dormitories,
         username: "@word",
     },],
 });
 
 data.people.forEach(person => person.phone = String(person.phone))
-
-/**
- * 验证数据合法性
- * @param {typeof data.people[0]} person
- */
-function validatePerson({ id, name, gender, phone, dormitory, username }) {
-    if (name == "") {
-        throw Error("所填的名字不合法");
-    }
-    phone = Number(phone)
-    if (isNaN(phone) || !isFinite(phone) || !Number.isInteger(phone)) {
-        throw Error("所填的电话号码不合法");
-    }
-    if (!dormitories.includes(dormitory)) {
-        throw Error("所填的宿舍楼不合法");
-    }
-    if (username == "") {
-        throw Error("所填的用户名不合法");
-    }
-}
 
 /** 空数据 */
 const emptyPerson = {
@@ -203,9 +184,6 @@ export const AdminManagement = {
             dormitory: "",        // 宿舍搜索框
         },
     }),
-    mounted() {
-        console.log("this", this)
-    },
     computed: {
         // 计算总页数
         totalPage() {
@@ -283,7 +261,7 @@ export const AdminManagement = {
         // 添加数据
         addPerson() {
             try {
-                validatePerson(this.newData)    // 验证数据
+                validateAdmin(this.newData)    // 验证数据
             } catch (error) {
                 alert(error.message)            // 如果数据又不合法项，弹框提示
                 return

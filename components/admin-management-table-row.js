@@ -1,4 +1,5 @@
 import { dormitories } from "../utils/dormitories.js";
+import { validateAdmin } from "../utils/validator.js";
 
 export const TableRow = {
     template: `
@@ -70,13 +71,13 @@ export const TableRow = {
     methods: {
         save() {
             try {
-                validatePerson(this.profile);   // 验证数据
+                validateAdmin(this.profile);   // 验证数据
             } catch (error) {
                 alert(error.message);           // 如果数据又不合法项，弹框提示
                 return;
             }
             this.editMode = false;              // 隐藏编辑栏
-            originProfile = { ...this.profile };
+            this.originProfile = { ...this.profile };
         },
         cancel() {
             this.editMode = false;
