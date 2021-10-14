@@ -35,7 +35,6 @@ const template = `
                     <!-- 表格主体 -->
                     <div class="card-body">
                     </div>
-                    表格主体尾部div
                 </div>
             </div>
         </div>
