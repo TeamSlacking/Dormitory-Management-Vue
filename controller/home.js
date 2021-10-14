@@ -7,7 +7,18 @@ const app = new Vue({
         viewName: "主页",
         userinfo: JSON.parse(sessionStorage.getItem("userinfo")),
     }),
-    methods: {},
+    methods: {
+        Logout(){
+            swal({
+                title: "注销成功",
+                text: "注销账号成功，3秒后自动退出当前登陆",
+                icon: "success",
+                button: "确定!",
+              });
+            sessionStorage.clear();
+            setTimeout("location.href = '/Dormitory_Management-vue/index.html'", 3000)
+        }
+    },
     computed: {
         viewComponent() {
             const item = menu.find((item) => item.name === this.viewName);
