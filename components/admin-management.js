@@ -1,22 +1,8 @@
 import { TableRow } from "./admin-management-table-row.js";
 import { dormitories } from "../utils/dormitories.js";
 import { validateAdmin } from "../utils/validator.js"
+import { getDormitoryAdmin } from "../utils/mock-data.js";
 
-/** @type {{people:{id: number; name: string; gender: 1 | 2; phone: string; dormitory: string, username: string}[]}} */
-let data = Mock.mock({
-    "people|112": [{
-        "id|+1": 1,
-        name: "@cname",
-        "gender|1": [1, 2],
-        phone: "@integer(13000000000, 19999999999)",
-        "dormitory|1": dormitories,
-        username: "@word",
-        password: "123"
-    }, ],
-});
-
-data.people.forEach(person => person.phone = String(person.phone))
-localStorage.setItem("data",JSON.stringify(data.people)) //存data进localStorage
 /** 空数据 */
 const emptyPerson = {
     id: Infinity,
@@ -40,7 +26,7 @@ export const AdminManagement = {
                     <!-- 搜索栏 -->
                     <form action="#" id="search_form" class="form-inline">
                         <div class="mb-2 mr-sm-2">
-                            <input v-model="searchForm.name" type="text" class="form-control" placeholder="姓名" />
+                            <input v-model.trim="searchForm.name" type="text" class="form-control" placeholder="姓名" />
                         </div>
                         <div class="mb-2 mr-sm-2">
                             <input v-model="searchForm.phone" type="number" class="form-control" placeholder="手机号" min="0" />
@@ -172,7 +158,7 @@ export const AdminManagement = {
     data: () => ({
         dormitories, // 宿舍楼列表
         header: ["序号", "姓名", "性别", "电话", "宿舍楼", "用户名", "操作"], // 表头
-        data: data.people, // mock.js 生成的数据
+        data: getDormitoryAdmin(), // mock.js 生成的数据
         currentPage: 1, // 当前页码
         pageSize: 5, // 页面显示数据量
         addModel: false, // 是否开启添加数据栏
@@ -202,7 +188,7 @@ export const AdminManagement = {
         filteredData() {
             return this.data.filter(
                 (v) =>
-                v.name.includes(this.searchForm.name.trim()) &&
+                v.name.includes(this.searchForm.name) &&
                 (this.searchForm.phone ? v.phone.includes(this.searchForm.phone) : true) &&
                 (this.searchForm.gender == 0 || this.searchForm.gender == v.gender) &&
                 v.dormitory.includes(this.searchForm.dormitory)

@@ -1,9 +1,10 @@
 import { menu } from "../utils/menu.js";
+import { getDormitoryAdmin } from "../utils/mock-data.js";
 
 const app = new Vue({
     el: '#app',
     data: {
-        system: JSON.parse(localStorage.getItem("data")), //取出来的数据
+        system: getDormitoryAdmin(), //取出来的数据
         loginForm: {
             username: localStorage.getItem("username") || '',
             password: localStorage.getItem("password") || '',
