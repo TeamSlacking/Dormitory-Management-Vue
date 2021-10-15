@@ -251,6 +251,7 @@ export const AbsenceRecords = {
             }
             this.addModel = false; // 隐藏添加数据栏
             this.newData.id = this.data[this.data.length - 1].id + 1;
+            this.newData.date = this.newData.date.replace("T", " ");
             this.data.push(this.newData); // 添加新数据
             this.newData = { ...emptyPerson }; // 清空添加数据栏内容
         },

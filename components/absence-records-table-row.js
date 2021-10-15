@@ -77,6 +77,7 @@ export const AbsenceTableRow = {
                 alert(error.message); // 如果数据又不合法项，弹框提示
                 return;
             }
+            this.profile.date=this.profile.date.replace("T", " ");
             this.editMode = false; // 隐藏编辑栏
             this.originProfile = { ...this.profile };
         },
@@ -88,8 +89,7 @@ export const AbsenceTableRow = {
             this.$emit("del", id)
         },
         time(date) {
-            
-            return date.replace("T", " ")
+            return date.replace("T", " ");
         },
     },
 };
