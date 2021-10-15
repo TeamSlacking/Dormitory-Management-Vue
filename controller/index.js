@@ -12,6 +12,10 @@ const app = new Vue({
         }
     },
     methods: {
+        /** @param {KeyboardEvent} event */
+        keyup(event) {
+            event.key === "Enter" && this.login()
+        },
         login() {
             //验证
             if (this.loginForm.username == "") {
