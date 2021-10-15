@@ -85,8 +85,8 @@ export const AbsenceRecords = {
                                         </select>
                                     </td>
                                     <td><input v-model="newData.room" class="form-control" type="number" style="width: 83px" /></td>
-                                    <td><input v-model="newData.date" class="form-control" type="datetime-local" style="width: auto" /></td>
-                                    <td><input v-model="newData.beizhu" class="form-control" type="text" style="width: 500px" /></td>
+                                    <td><input v-model="newData.date" class="form-control" type="datetime-local" style="width: 150px" /></td>
+                                    <td><textarea v-model="newData.beizhu" class="form-control" type="text" /></td>
                                     <td>
                                         <div class="btn-group" role="group">
                                             <button type="button" class="btn btn-outline-primary" @click="addPerson()">添加</button>

@@ -41,9 +41,9 @@ export const AbsenceTableRow = {
                     <input v-model="profile.room" class="form-control" type="number" style="width: 83px;"/>
                 </td>
                 <td>
-                    <input v-model="profile.date" class="form-control" type="datetime-local" style="width: auto;"/>
+                    <input v-model="profile.date" class="form-control" type="datetime-local" style="width: 150px;"/>
                 </td>
-                <td><input v-model="profile.beizhu" class="form-control" type="text" style="width: 500px;"/></td>
+                <td><textarea v-model="profile.beizhu" class="form-control" type="text-area" /></td>
                 <td>
                     <div>
                         <button type="button" class="btn btn-outline-primary mb-2" @click="save()">保存</button>
