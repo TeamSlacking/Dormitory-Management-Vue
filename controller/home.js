@@ -1,7 +1,11 @@
 import { menu } from "../utils/menu.js";
+import { SakuraSwitch } from "../components/sakura-switch.js";
 
 const app = new Vue({
     el: "#app",
+    components: {
+        "sakura-switch": SakuraSwitch,
+    },
     data: () => ({
         menu,
         viewName: "主页",
@@ -56,9 +60,10 @@ const app = new Vue({
         }
     },
     watch: {
+        /** @param {string} value */
         viewName(value) {
             sessionStorage.setItem("lastView", value)
-        }
+        },
     },
     mounted() {
         const viewName = sessionStorage.getItem("lastView")
