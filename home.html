@@ -16,7 +16,6 @@
     <script src="public/js/vue.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-    <script src="./utils/yinghua.js"></script>
     <script type="module" src="./controller/home.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -40,15 +39,20 @@
                     <span> {{welcome}} </span>
                     <!-- 头像 -->
                     <ul class="navbar-nav navbar-nav-right">
+                        <li class="nav-item" style="display: flex; align-items: center; column-gap: 5px;">
+                            <span>樱花特效</span>
+                            <sakura-switch />
+                        </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                                aria-expanded="false">
                                 <img class="avatar p-1 navbar-img rounded-circle" src="./img/diana.jpg" alt="Hz1">
                             </a>
                             <!-- 点击头像弹出 -->
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="#">个人信息</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" @click="Logout" >注销</a>
+                                <a class="dropdown-item" @click="Logout">注销</a>
                             </div>
                         </li>
                     </ul>
@@ -64,12 +68,8 @@
                 <div class="col-md-2">
                     <div class="list-group">
                         <template v-for="item in menu">
-                            <button
-                                :key="item.name"
-                                @click="viewName = item.name"
-                                type="button"
-                                :class="[viewName == item.name && 'active', 'list-group-item list-group-item-action']"
-                            >
+                            <button :key="item.name" @click="viewName = item.name" type="button"
+                                :class="[viewName == item.name && 'active', 'list-group-item list-group-item-action']">
                                 {{ item.name }}
                                 <i class="bi bi-chevron-right"></i>
                             </button>
@@ -81,6 +81,7 @@
                 <component :is="viewComponent"></component>
             </div>
         </div>
+
 </body>
 
 </html>
