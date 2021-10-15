@@ -9,14 +9,30 @@ const app = new Vue({
     }),
     methods: {
         Logout(){
-            swal({
-                title: "注销成功",
-                text: "注销账号成功，3秒后自动退出当前登陆",
-                icon: "success",
-                button: "确定!",
-              });
+            let timerInterval
+                Swal.fire({
+                title: '注销中!',
+                html: '正常清除数据 <b></b>,完成后自动退出登录 .',
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading()
+                    const b = Swal.getHtmlContainer().querySelector('b')
+                    timerInterval = setInterval(() => {
+                    b.textContent = Swal.getTimerLeft()
+                    }, 100)
+                },
+                willClose: () => {
+                    clearInterval(timerInterval)
+                }
+                }).then((result) => {
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    console.log('I was closed by the timer')
+                }
+                })
+
             sessionStorage.clear();
-            setTimeout("location.href = '/Dormitory_Management-vue/index.html'", 3000)
+            setTimeout("location.href = '/Dormitory_Management-vue/index.html'", 2000)
         }
     },
     computed: {
