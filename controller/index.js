@@ -3,12 +3,12 @@ import { menu } from "../utils/menu.js";
 const app = new Vue({
     el: '#app',
     data: {
-        userinfo: JSON.parse(sessionStorage.getItem("userinfo")),
+        system: JSON.parse(localStorage.getItem("data")), //取出来的数据
         loginForm: {
             username: localStorage.getItem("username") || '',
             password: localStorage.getItem("password") || '',
-            type: 0,
-            rem: false
+            type: 0, //用户类型  0为系统管理员 1为宿舍管理员 2为学生 默认为0
+            rem: false, //勾选记住密码  默认为false
         }
     },
     methods: {
@@ -51,17 +51,18 @@ const app = new Vue({
                 });
                 return;
             }
+            //系统管理员登录
             if (this.loginForm.type == 0) {
                 if (this.loginForm.username == "admin" && this.loginForm.password == "123") {
                     if (this.loginForm.rem) {
                         localStorage.setItem("username", this.loginForm.username);
-                        localStorage.setItem("login_password", this.loginForm.password);
+                        localStorage.setItem("password", this.loginForm.password);
                     } else {
                         localStorage.removeItem("username");
                         localStorage.removeItem("password");
                     }
                     sessionStorage.setItem("menu", JSON.stringify(menu));
-                    delete this.loginForm.Login_password;
+                    delete this.loginForm.password;
                     sessionStorage.setItem("userinfo", JSON.stringify(this.loginForm))
                     location.href = 'home.html'
                 } else {
@@ -73,8 +74,24 @@ const app = new Vue({
                     });
                     return;
                 }
+                //宿舍管理员登录
             } else if (this.loginForm.type == 1) {
-
+                let isSucess = false; //判断账号是否正确
+                for(let index in this.system){
+                    let item = this.system[index];
+                    if(item.username == this.loginForm.username && this.loginForm.password == this.loginForm.password ){
+                        isSucess = true;
+                        break; //中止循环
+                        // continue 跳出当次循环
+                    }
+                }
+                if(isSucess){
+                    sessionStorage.setItem("menu", JSON.stringify(menu));
+                    delete this.loginForm.password;
+                    sessionStorage.setItem("userinfo", JSON.stringify(this.loginForm))
+                    location.href = 'home.html'
+                }
+                //学生登录
             } else if (this.loginForm.type == 2) {
 
             } else {

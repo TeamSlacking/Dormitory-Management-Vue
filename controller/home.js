@@ -12,7 +12,7 @@ const app = new Vue({
             let timerInterval
                 Swal.fire({
                 title: '注销中!',
-                html: '正常清除数据 <b></b>,完成后自动退出登录 .',
+                html: '正常清除数据 <b></b>项,完成后自动退出登录 .',
                 timer: 2000,
                 timerProgressBar: true,
                 didOpen: () => {
@@ -32,7 +32,10 @@ const app = new Vue({
                 })
 
             sessionStorage.clear();
-            setTimeout("location.href = '/Dormitory_Management-vue/index.html'", 2000)
+            setTimeout("location.href = './index.html'", 2000)
+        },
+        changePassword() {
+
         }
     },
     computed: {

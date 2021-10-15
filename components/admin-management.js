@@ -11,11 +11,12 @@ let data = Mock.mock({
         phone: "@integer(13000000000, 19999999999)",
         "dormitory|1": dormitories,
         username: "@word",
+        password: "123"
     }, ],
 });
 
 data.people.forEach(person => person.phone = String(person.phone))
-
+localStorage.setItem("data",JSON.stringify(data.people)) //存data进localStorage
 /** 空数据 */
 const emptyPerson = {
     id: Infinity,
