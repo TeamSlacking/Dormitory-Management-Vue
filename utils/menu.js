@@ -1,4 +1,4 @@
-import { IndexWelcome } from "../components/index-welcome.js";
+import { HomeWelcome } from "../components/home-welcome.js";
 import { AdminManagement } from "../components/admin-management.js";
 import { StudentManagement } from "../components/student-management.js";
 import { BuildingManagement } from "../components/building-management.js";
@@ -12,7 +12,7 @@ const { SystemAdmin, DormitoryAdmin, Student } = userType
 export const menu = [
     {
         name: "主页",
-        component: IndexWelcome,
+        component: HomeWelcome,
         allows: [SystemAdmin, DormitoryAdmin, Student],
     },
     {

@@ -41,6 +41,7 @@ const template = `
     </div>
 `;
 
-export const IndexWelcome = {
+export const HomeWelcome = {
+    name: "home-welcome",
     template,
 };
