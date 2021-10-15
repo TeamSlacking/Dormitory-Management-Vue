@@ -44,7 +44,7 @@ const app = new Vue({
     },
     computed: {
         menu() {
-            return menu.filter((item) => item.allows.includes(this.userinfo.type));
+            return menu.filter((item) => item.allows.includes(Number(this.userinfo.type)));
         },
         viewComponent() {
             const item = menu.find((item) => item.name === this.viewName);
