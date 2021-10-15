@@ -201,7 +201,7 @@ export const AdminManagement = {
         filteredData() {
             return this.data.filter(
                 (v) =>
-                v.name.includes(this.searchForm.name) &&
+                v.name.includes(this.searchForm.name.trim()) &&
                 (this.searchForm.phone ? v.phone.includes(this.searchForm.phone) : true) &&
                 (this.searchForm.gender == 0 || this.searchForm.gender == v.gender) &&
                 v.dormitory.includes(this.searchForm.dormitory)
