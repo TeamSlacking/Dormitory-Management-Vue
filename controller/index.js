@@ -5,8 +5,8 @@ const app = new Vue({
     data: {
         userinfo: JSON.parse(sessionStorage.getItem("userinfo")),
         loginForm: {
-            Login_username: localStorage.getItem("login_username") || '',
-            Login_password: localStorage.getItem("login_password") || '',
+            username: localStorage.getItem("username") || '',
+            password: localStorage.getItem("password") || '',
             type: 0,
             rem: false
         }
@@ -14,7 +14,7 @@ const app = new Vue({
     methods: {
         login() {
             //验证
-            if (this.loginForm.Login_username == "") {
+            if (this.loginForm.username == "") {
                 swal({
                     title: "Error!",
                     text: "账号不能为空!",
@@ -23,7 +23,7 @@ const app = new Vue({
                 });
                 return;
             }
-            if (this.loginForm.Login_password == "") {
+            if (this.loginForm.password == "") {
                 swal({
                     title: "Error!",
                     text: "密码不能为空!",
@@ -32,7 +32,7 @@ const app = new Vue({
                 });
                 return;
             }
-            if (this.loginForm.Login_username.length < 5 || this.loginForm.Login_username.length > 18) {
+            if (this.loginForm.username.length < 5 || this.loginForm.username.length > 18) {
                 swal({
                     title: "Error!",
                     text: "账号长度为5~18位!",
@@ -42,7 +42,7 @@ const app = new Vue({
                 return;
             }
 
-            if (this.loginForm.Login_password.length < 3 || this.loginForm.Login_password.length > 18) {
+            if (this.loginForm.password.length < 3 || this.loginForm.password.length > 18) {
                 swal({
                     title: "Error!",
                     text: "密码长度为3~18位!",
@@ -52,13 +52,13 @@ const app = new Vue({
                 return;
             }
             if (this.loginForm.type == 0) {
-                if (this.loginForm.Login_username == "admin" && this.loginForm.Login_password == "123") {
+                if (this.loginForm.username == "admin" && this.loginForm.password == "123") {
                     if (this.loginForm.rem) {
-                        localStorage.setItem("login_username", this.loginForm.Login_username);
-                        localStorage.setItem("login_password", this.loginForm.Login_password);
+                        localStorage.setItem("username", this.loginForm.username);
+                        localStorage.setItem("login_password", this.loginForm.password);
                     } else {
-                        localStorage.removeItem("login_username");
-                        localStorage.removeItem("login_password");
+                        localStorage.removeItem("username");
+                        localStorage.removeItem("password");
                     }
                     sessionStorage.setItem("menu", JSON.stringify(menu));
                     delete this.loginForm.Login_password;

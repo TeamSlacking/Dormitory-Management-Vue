@@ -24,7 +24,7 @@ const app = new Vue({
             const item = menu.find((item) => item.name === this.viewName);
             return item.component ?? IndexWelcome;
         },
-        Welcome(){
+        welcome(){
             if(this.userinfo.type == 0){
                 return "欢迎您，系统管理员";
             } else if (this.userinfo.type == 1){
