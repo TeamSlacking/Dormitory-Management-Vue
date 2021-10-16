@@ -1,6 +1,7 @@
 import { menu } from "../utils/menu.js";
 import { userType } from "../utils/user-type.js";
 import { SakuraSwitch } from "../components/sakura-switch.js";
+import { loadAvatar, storeAvatar } from "../utils/avatar.js";
 
 const app = new Vue({
     el: "#app",
@@ -9,14 +10,18 @@ const app = new Vue({
     },
     data: () => ({
         viewName: "主页",
+        avatarSrc: "./img/diana.jpg",
         userinfo: JSON.parse(sessionStorage.getItem("userinfo")),
     }),
-    provide: function () {
+    provide: function() {
         return {
             userinfo: this.userinfo
         }
     },
     methods: {
+        storeAvatar(username) {
+            storeAvatar(username, (src) => this.avatarSrc = src)
+        },
         Logout() {
             Swal.fire({
                 title: '你确定吗？',
@@ -93,5 +98,6 @@ const app = new Vue({
         if (viewName) {
             this.viewName = viewName
         }
+        this.avatarSrc = loadAvatar(this.userinfo.username) ?? this.avatarSrc
     },
 });

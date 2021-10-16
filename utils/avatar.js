@@ -12,7 +12,7 @@ function getUserAvatarKey(username) {
  * 参数为用户名，调用函数后会自动弹出文件选择窗口，用户选择文件后会自动存储
  * @param {string} username 
  */
-export function storeAvatar(username) {
+export function storeAvatar(username, callback) {
     const inputElement = document.createElement("input")
     inputElement.type = "file";
     inputElement.accept = "image/*";
@@ -23,6 +23,7 @@ export function storeAvatar(username) {
             const base64 = e.target.result
             try {
                 localStorage.setItem(`users.${username}.avatar`, base64)
+                callback(base64)
             } catch (error) {
                 alert(`更换背景失败，可以检查图片文件大小是否过大。${error}`)
             }
