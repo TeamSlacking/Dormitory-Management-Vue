@@ -20,40 +20,40 @@ const app = new Vue({
         login() {
             //验证
             if (this.loginForm.username == "") {
-                swal({
-                    title: "Error!",
-                    text: "账号不能为空!",
-                    type: "error",
-                    confirmButtonText: "OK"
-                });
+                Swal.fire({
+                    icon: 'error',
+                    title: '错误！',
+                    text: '账号不能为空！',
+                    button: '我知道了！'
+                  });
                 return;
             }
             if (this.loginForm.password == "") {
-                swal({
-                    title: "Error!",
-                    text: "密码不能为空!",
-                    type: "error",
-                    confirmButtonText: "OK"
-                });
+                Swal.fire({
+                    icon: 'error',
+                    title: '错误！',
+                    text: '密码不能为空！',
+                    button: '我知道了！'
+                  });
                 return;
             }
             if (this.loginForm.username.length < 5 || this.loginForm.username.length > 18) {
-                swal({
-                    title: "Error!",
-                    text: "账号长度为5~18位!",
-                    type: "error",
-                    confirmButtonText: "OK"
-                });
+                Swal.fire({
+                    icon: 'error',
+                    title: '错误！',
+                    text: '账号长度为5~18位！',
+                    button: '我知道了！'
+                  });
                 return;
             }
 
             if (this.loginForm.password.length < 3 || this.loginForm.password.length > 18) {
-                swal({
-                    title: "Error!",
-                    text: "密码长度为3~18位!",
-                    type: "error",
-                    confirmButtonText: "OK"
-                });
+                Swal.fire({
+                    icon: 'error',
+                    title: '错误！',
+                    text: '密码长度为5~18位！',
+                    button: '我知道了！'
+                  });
                 return;
             }
             //系统管理员登录
@@ -70,12 +70,12 @@ const app = new Vue({
                     sessionStorage.setItem("userinfo", JSON.stringify(this.loginForm))
                     location.href = 'home.html'
                 } else {
-                    swal({
-                        title: "Error!",
-                        text: "账号或者密码错误!",
-                        type: "error",
-                        confirmButtonText: "OK"
-                    });
+                    Swal.fire({
+                        icon: 'error',
+                        title: '错误！',
+                        text: '账号或者密码错误！',
+                        button: '我知道了！'
+                      });
                     return;
                 }
                 //宿舍管理员登录
@@ -101,24 +101,24 @@ const app = new Vue({
                     sessionStorage.setItem("userinfo", JSON.stringify(this.loginForm))
                     location.href = 'home.html'
                 } else {
-                    swal({
-                        title: "Error!",
-                        text: "账号或者密码错误!",
-                        type: "error",
-                        confirmButtonText: "OK"
-                    });
+                    Swal.fire({
+                        icon: 'error',
+                        title: '错误！',
+                        text: '账号或者密码错误！',
+                        button: '我知道了！'
+                      });
                     return;
                 }
                 //学生登录
             } else if (this.loginForm.type == 2) {
 
             } else {
-                swal({
-                    title: "Error!",
-                    text: "登陆类型选择错误!",
-                    type: "error",
-                    confirmButtonText: "OK"
-                });
+                Swal.fire({
+                    icon: 'error',
+                    title: '错误！',
+                    text: '登陆类型选择错误！',
+                    button: '我知道了！'
+                  });
                 return;
             }
         }

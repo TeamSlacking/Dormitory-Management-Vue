@@ -61,13 +61,14 @@ export const ChangePassword = {
                      // 新的密码赋值给 找到的这条数据里面的password
                      dormitoryAdmin.password = this.newPass; 
                      saveDormitoryAdmin(this.system);
+                     localStorage.setItem("password", dormitoryAdmin.password);
                      Swal.fire({
                         icon: 'success',
                         title: '成功',
                         text: '修改密码成功！',
                         button: 'ok！',
                     })
-                    return;
+                    setTimeout("location.href = './index.html'", 1000)
                } else if(this.userinfo.type == 1){
                    
                }
