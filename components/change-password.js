@@ -60,7 +60,7 @@ export const ChangePassword = {
                      let dormitoryAdmin = this.system.find(item => item.password == this.oldPass && item.username == this.userinfo.username);
                      // 新的密码赋值给 找到的这条数据里面的password
                      dormitoryAdmin.password = this.newPass; 
-                     saveDormitoryAdmin(dormitoryAdmin);
+                     saveDormitoryAdmin(this.system);
                      Swal.fire({
                         icon: 'success',
                         title: '成功',
