@@ -19,7 +19,7 @@ export function getDormitoryAdmin() {
             "dormitory|1": dormitories,
             username: "@word",
             password: "123"
-        }, ],
+        },],
     });
     people.forEach(person => person.phone = String(person.phone))
     saveDormitoryAdmin(people)  //存data进localStorage
@@ -33,10 +33,10 @@ export function getDormitoryAdmin() {
 
 export function getStudentAdmin() {
     const student = localStorage.getItem("studentAdmin")
-    if(student) {
+    if (student) {
         return JSON.parse(student)
     }
-    
+
     let { people } = Mock.mock({
         "people|100": [{
             "id|+1": 1,
@@ -47,7 +47,7 @@ export function getStudentAdmin() {
             "dormitory|1": dormitories,
             "roomId": /\d{3}/,
             password: "123"
-        }, ],
+        },],
     });
     people.forEach(person => person.phone = String(person.phone))
     saveStudentAdmin(people)  //存data进localStorage
@@ -55,38 +55,26 @@ export function getStudentAdmin() {
 }
 
 /** 
- * 
  * @returns {{id: number; name: string; bio: string; admin: string}[]}} 
- * 
- * */
-
- export function getDormitory() {
+*/
+export function getDormitory() {
     const dormitory = localStorage.getItem("dormitory")
-    if(dormitory) {
+    if (dormitory) {
         return JSON.parse(dormitory)
     }
-    
-    let { people } = Mock.mock({
-        "people|9": [{
-            "id|+1": 1,
-            name: "@cname",
-            "bio": "",
-            "admin|1": [
-                "@cname",
-                "@cname @cname",
-                "@cname @cname @cname",
-                "@cname @cname @cname @cname",
-                "@cname @cname @cname @cname @cname",
-                "@cname @cname @cname @cname @cname @cname",
-            ],
-        }, ],
-    });
-    people.forEach((p, i) => {
-        p.name = dormitories[i],
-        p.bio = `这里是${dormitories[i]}， 位于XXX`
-    })
-    saveDormitory(people)  //存data进localStorage
-    return people
+
+    const admins = getDormitoryAdmin()
+    const data = dormitories.map((building, index) => ({
+        id: index + 1,
+        name: building,
+        bio: `这里是${building}， 位于XXX`,
+        admin: admins.filter((admin) => admin.dormitory === building)
+            .map((admin) => admin.name)
+            .join(" ")
+    }))
+
+    saveDormitory(data) 
+    return data
 }
 
 
