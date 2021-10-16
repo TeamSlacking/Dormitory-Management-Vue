@@ -12,34 +12,49 @@ const app = new Vue({
         userinfo: JSON.parse(sessionStorage.getItem("userinfo")),
     }),
     methods: {
-        Logout(){
-            let timerInterval
-                Swal.fire({
-                title: '注销中!',
-                html: '正常清除数据 <b></b>项,完成后自动退出登录 .',
-                timer: 2000,
-                timerProgressBar: true,
-                didOpen: () => {
-                    Swal.showLoading()
-                    const b = Swal.getHtmlContainer().querySelector('b')
-                    timerInterval = setInterval(() => {
-                    b.textContent = Swal.getTimerLeft()
-                    }, 100)
-                },
-                willClose: () => {
-                    clearInterval(timerInterval)
+        Logout() {
+            Swal.fire({
+                title: '你确定吗？',
+                text: "你确定要注销系统吗？",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '是的，我确定！',
+                cancelButtonText: '取消，我不退出',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    let timerInterval
+                    Swal.fire({
+                        title: '注销中!',
+                        html: '正常清除数据 <b></b>项 .',
+                        timer: 2000,
+                        timerProgressBar: true,
+                        icon: 'warning',
+                        didOpen: () => {
+                            Swal.showLoading()
+                            const b = Swal.getHtmlContainer().querySelector('b')
+                            timerInterval = setInterval(() => {
+                                b.textContent = Swal.getTimerLeft()
+                            }, 100)
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval)
+                        }
+                    }).then((result) => {
+                        if (result.dismiss === Swal.DismissReason.timer) {
+                            Swal.fire({
+                                title: '清除数据成功',
+                                icon: 'success',
+                                type: 'success',
+                                button: '确定！'
+                            })
+                        }
+                    })
+                    sessionStorage.clear();
+                    setTimeout("location.href = './index.html'", 3000)
                 }
-                }).then((result) => {
-                if (result.dismiss === Swal.DismissReason.timer) {
-                    console.log('I was closed by the timer')
-                }
-                })
-
-            sessionStorage.clear();
-            setTimeout(() => location.href = './index.html', 2000)
-        },
-        changePassword() {
-
+            })
         }
     },
     computed: {
@@ -50,14 +65,14 @@ const app = new Vue({
             const item = menu.find((item) => item.name === this.viewName);
             return item.component ?? IndexWelcome;
         },
-        welcome(){
-            if(this.userinfo.type == userType.SystemAdmin){
+        welcome() {
+            if (this.userinfo.type == userType.SystemAdmin) {
                 return "欢迎您，系统管理员";
-            } else if (this.userinfo.type == userType.DormitoryAdmin){
+            } else if (this.userinfo.type == userType.DormitoryAdmin) {
                 return "欢迎您，宿舍管理员";
-            }else if (this.userinfo.type == userType.Student){
+            } else if (this.userinfo.type == userType.Student) {
                 return "欢迎您，同学";
-            }else {
+            } else {
                 return "非法访问！"
             }
         }

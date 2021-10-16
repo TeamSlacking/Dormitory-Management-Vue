@@ -67,7 +67,6 @@ const app = new Vue({
                         localStorage.removeItem("password");
                     }
                     sessionStorage.setItem("menu", JSON.stringify(menu));
-                    delete this.loginForm.password;
                     sessionStorage.setItem("userinfo", JSON.stringify(this.loginForm))
                     location.href = 'home.html'
                 } else {
@@ -84,17 +83,31 @@ const app = new Vue({
                 let isSucess = false; //判断账号是否正确
                 for(let index in this.system){
                     let item = this.system[index];
-                    if(item.username == this.loginForm.username && this.loginForm.password == this.loginForm.password ){
+                    if(item.username == this.loginForm.username && item.password == this.loginForm.password ){
                         isSucess = true;
                         break; //中止循环
                         // continue 跳出当次循环
                     }
                 }
                 if(isSucess){
+                    if (this.loginForm.rem) {
+                        localStorage.setItem("username", this.loginForm.username);
+                        localStorage.setItem("password", this.loginForm.password);
+                    } else {
+                        localStorage.removeItem("username");
+                        localStorage.removeItem("password");
+                    }
                     sessionStorage.setItem("menu", JSON.stringify(menu));
-                    delete this.loginForm.password;
                     sessionStorage.setItem("userinfo", JSON.stringify(this.loginForm))
                     location.href = 'home.html'
+                } else {
+                    swal({
+                        title: "Error!",
+                        text: "账号或者密码错误!",
+                        type: "error",
+                        confirmButtonText: "OK"
+                    });
+                    return;
                 }
                 //学生登录
             } else if (this.loginForm.type == 2) {
