@@ -1,4 +1,4 @@
-import { getDormitoryAdmin, saveDormitoryAdmin } from "../utils/mock-data.js";
+import { getDormitoryAdmin, getStudentAdmin, saveDormitoryAdmin, saveStudentAdmin } from "../utils/mock-data.js";
 
 export const ChangePassword = {
     name: "change-password",
@@ -25,8 +25,9 @@ export const ChangePassword = {
     data: () => ({
         name: "修改密码",
         oldPass: "",
-        newPass:'',
-        repPass:'',
+        newPass: '',
+        repPass: '',
+        student: getStudentAdmin(),
         system: getDormitoryAdmin(),
         userinfo: JSON.parse(sessionStorage.getItem("userinfo")),
     }),
@@ -42,7 +43,7 @@ export const ChangePassword = {
                 return;
             }
 
-            if (this.newPass != this.repPass ) {
+            if (this.newPass != this.repPass) {
                 Swal.fire({
                     icon: 'error',
                     title: '错误',
@@ -52,26 +53,38 @@ export const ChangePassword = {
                 return;
             }
 
-            if(this.oldPass == this.userinfo.password) {
-               if(this.userinfo.type == 0){
+            if (this.oldPass == this.userinfo.password) {
+                if (this.userinfo.type == 0) {
 
-               } else if(this.userinfo.type == 1){
-                     // 定义dormitoryAdmin   从getDormitoryAdmin()的数据里面遍历寻找当前账户的密码和当前账户账号
-                     let dormitoryAdmin = this.system.find(item => item.password == this.oldPass && item.username == this.userinfo.username);
-                     // 新的密码赋值给 找到的这条数据里面的password
-                     dormitoryAdmin.password = this.newPass; 
-                     saveDormitoryAdmin(this.system);
-                     localStorage.setItem("password", dormitoryAdmin.password);
-                     Swal.fire({
+                } else if (this.userinfo.type == 1) {
+                    // 定义dormitoryAdmin   从getDormitoryAdmin()的数据里面遍历寻找当前账户的密码和当前账户账号
+                    let dormitoryAdmin = this.system.find(item => item.password == this.oldPass && item.username == this.userinfo.username);
+                    // 新的密码赋值给 找到的这条数据里面的password
+                    dormitoryAdmin.password = this.newPass;
+                    saveDormitoryAdmin(this.system);
+                    localStorage.setItem("password", dormitoryAdmin.password);
+                    Swal.fire({
                         icon: 'success',
                         title: '成功',
                         text: '修改密码成功！',
                         button: 'ok！',
                     })
                     setTimeout("location.href = './index.html'", 1000)
-               } else if(this.userinfo.type == 1){
-                   
-               }
+                } else if (this.userinfo.type == 2) {
+                    let studentAdmin = this.student.find(item => item.password == this.oldPass && item.scode == this.userinfo.username);
+                    // 新的密码赋值给 找到的这条数据里面的password
+                    studentAdmin.password = this.newPass;
+                    saveStudentAdmin(this.student);
+                    localStorage.setItem("password", studentAdmin.password);
+                    Swal.fire({
+                        icon: 'success',
+                        title: '成功',
+                        text: '修改密码成功！',
+                        button: 'ok！',
+                    })
+                    setTimeout("location.href = './index.html'", 1000)
+
+                }
             }
         }
     },

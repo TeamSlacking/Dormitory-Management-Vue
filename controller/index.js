@@ -1,9 +1,10 @@
 import { menu } from "../utils/menu.js";
-import { getDormitoryAdmin } from "../utils/mock-data.js";
+import { getDormitoryAdmin, getStudentAdmin } from "../utils/mock-data.js";
 
 const app = new Vue({
     el: '#app',
     data: {
+        student: getStudentAdmin(),
         system: getDormitoryAdmin(), //取出来的数据
         loginForm: {
             username: localStorage.getItem("username") || '',
@@ -25,7 +26,7 @@ const app = new Vue({
                     title: '错误！',
                     text: '账号不能为空！',
                     button: '我知道了！'
-                  });
+                });
                 return;
             }
             if (this.loginForm.password == "") {
@@ -34,7 +35,7 @@ const app = new Vue({
                     title: '错误！',
                     text: '密码不能为空！',
                     button: '我知道了！'
-                  });
+                });
                 return;
             }
             if (this.loginForm.username.length < 5 || this.loginForm.username.length > 18) {
@@ -43,7 +44,7 @@ const app = new Vue({
                     title: '错误！',
                     text: '账号长度为5~18位！',
                     button: '我知道了！'
-                  });
+                });
                 return;
             }
 
@@ -53,7 +54,7 @@ const app = new Vue({
                     title: '错误！',
                     text: '密码长度为5~18位！',
                     button: '我知道了！'
-                  });
+                });
                 return;
             }
             //系统管理员登录
@@ -75,21 +76,21 @@ const app = new Vue({
                         title: '错误！',
                         text: '账号或者密码错误！',
                         button: '我知道了！'
-                      });
+                    });
                     return;
                 }
                 //宿舍管理员登录
             } else if (this.loginForm.type == 1) {
                 let isSucess = false; //判断账号是否正确
-                for(let index in this.system){
+                for (let index in this.system) {
                     let item = this.system[index];
-                    if(item.username == this.loginForm.username && item.password == this.loginForm.password ){
+                    if (item.username == this.loginForm.username && item.password == this.loginForm.password) {
                         isSucess = true;
                         break; //中止循环
                         // continue 跳出当次循环
                     }
                 }
-                if(isSucess){
+                if (isSucess) {
                     if (this.loginForm.rem) {
                         localStorage.setItem("username", this.loginForm.username);
                         localStorage.setItem("password", this.loginForm.password);
@@ -106,24 +107,43 @@ const app = new Vue({
                         title: '错误！',
                         text: '账号或者密码错误！',
                         button: '我知道了！'
-                      });
+                    });
                     return;
                 }
                 //学生登录
             } else if (this.loginForm.type == 2) {
-
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: '错误！',
-                    text: '登陆类型选择错误！',
-                    button: '我知道了！'
-                  });
-                return;
+                let isSucess = false; //判断账号是否正确
+                for (let index in this.student) {
+                    let item = this.student[index];
+                    if (item.scode == this.loginForm.username && item.password == this.loginForm.password) {
+                        isSucess = true;
+                        break; //中止循环
+                    }
+                }
+                if (isSucess) {
+                    if (this.loginForm.rem) {
+                        localStorage.setItem("username", this.loginForm.username);
+                        localStorage.setItem("password", this.loginForm.password);
+                    } else {
+                        localStorage.removeItem("username");
+                        localStorage.removeItem("password");
+                    }
+                    sessionStorage.setItem("menu", JSON.stringify(menu));
+                    sessionStorage.setItem("userinfo", JSON.stringify(this.loginForm))
+                    location.href = 'home.html'
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '错误！',
+                        text: '登陆类型选择错误！',
+                        button: '我知道了！'
+                    });
+                    return;
+                }
             }
         }
     },
     computed: {
-        
+
     },
 })
