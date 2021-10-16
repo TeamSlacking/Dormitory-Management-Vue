@@ -10,10 +10,12 @@ const app = new Vue({
         "sakura-switch": SakuraSwitch,
     },
     data: () => ({
-        viewName: sessionStorage.getItem("lastView"),
+        viewName: sessionStorage.getItem("lastView") || "主页",
         avatarSrc: "./img/diana.jpg",
         userinfo: JSON.parse(sessionStorage.getItem("userinfo")),
         system:getDormitory(),
+        dorm:sessionStorage.getItem("dormUser"),
+        stu:sessionStorage.getItem("stuUser")
     }),
     provide: function() {
         return {
@@ -76,6 +78,15 @@ const app = new Vue({
         viewComponent() {
             const item = menu.find((item) => item.name === this.viewName);
             return item.component ?? IndexWelcome;
+        },
+        name(){
+            if(this.userinfo.type == userType.SystemAdmin){
+                return this.userinfo.username
+            } else if (this.userinfo.type == userType.DormitoryAdmin) {
+                return this.dorm;
+            } else if (this.userinfo.type == userType.Student) {
+                return this.stu;
+            }
         },
         welcome() {
             if (this.userinfo.type == userType.SystemAdmin) {

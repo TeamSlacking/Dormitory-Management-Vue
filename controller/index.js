@@ -106,6 +106,8 @@ const app = new Vue({
                         localStorage.removeItem("username");
                         localStorage.removeItem("password");
                     }
+                    let dorm = this.system.find(item => item.username == this.loginForm.username)
+                    sessionStorage.setItem("dormUser",dorm.name)
                     sessionStorage.setItem("menu", JSON.stringify(menu));
                     sessionStorage.setItem("userinfo", JSON.stringify(this.loginForm))
                     location.href = 'home.html'
@@ -136,6 +138,8 @@ const app = new Vue({
                         localStorage.removeItem("username");
                         localStorage.removeItem("password");
                     }
+                    let stu = this.student.find(item => item.scode == this.loginForm.username)
+                    sessionStorage.setItem("stuUser",stu.sname)
                     sessionStorage.setItem("menu", JSON.stringify(menu));
                     sessionStorage.setItem("userinfo", JSON.stringify(this.loginForm))
                     location.href = 'home.html'
