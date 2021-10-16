@@ -7,19 +7,19 @@ import { getDormitoryAdmin, getStudentAdmin } from "../utils/mock-data.js";
 const emptyPerson = {
     id: Infinity,
     scode: "",
-	sname: "",
+    sname: "",
     gender: 1,
     phone: "",
     dormitory: "",
-	roomId: "",
+    roomId: "",
 };
 
 
 export const StudentManagement = {
     name: "student-management",
-	components: {
-	    "table-row": StudentsTableRow,
-	},
+    components: {
+        "table-row": StudentsTableRow,
+    },
     template: `
         <div class="col-md-10">
             <div class="jumbotron">
@@ -111,7 +111,7 @@ export const StudentManagement = {
                                 </span>
                                 条记录
                             </div>
-                            <nav class="col-md-9" aria-label="Page navigation">
+                            <nav class="col-md-9 pagerCenter" aria-label="Page navigation">
                                 <ul class="pagination" style="display: flex; flex-wrap: wrap;">
                                     <li
                                         :class="['page-item', { disabled: isFirstPage }]"
@@ -162,22 +162,22 @@ export const StudentManagement = {
     inject: ["userinfo"],
     data: () => ({
         // sname: "学生管理"
-		dormitories, // 宿舍楼列表
-		header: ["序号","学号","姓名","性别","电话","宿舍楼","寝室","操作"], // 表头
-		data: getStudentAdmin(), // mock.js 生成的数据
-		currentPage: 1, // 当前页码
-		pageSize: 5, // 页面显示数据量
-		addModel: false, // 是否开启添加数据栏
-		newData: {...emptyPerson }, // 新数据存储对象
-		selectedIds: [],
-		searchForm: {
-		    sname: "", // 名字搜索框
-		    phone: undefined, // 电话搜索框
-		    gender: 0, // 性别搜索框
-		    dormitory: "", // 宿舍搜索框
-		},
+        dormitories, // 宿舍楼列表
+        header: ["序号", "学号", "姓名", "性别", "电话", "宿舍楼", "寝室", "操作"], // 表头
+        data: getStudentAdmin(), // mock.js 生成的数据
+        currentPage: 1, // 当前页码
+        pageSize: 5, // 页面显示数据量
+        addModel: false, // 是否开启添加数据栏
+        newData: {...emptyPerson }, // 新数据存储对象
+        selectedIds: [],
+        searchForm: {
+            sname: "", // 名字搜索框
+            phone: undefined, // 电话搜索框
+            gender: 0, // 性别搜索框
+            dormitory: "", // 宿舍搜索框
+        },
     }),
-	computed: {
+    computed: {
         // 计算总页数
         totalPage() {
             return Math.ceil(this.filteredData.length / this.pageSize) || 1;

@@ -15,7 +15,6 @@ const emptyPerson = {
 };
 
 export const AbsenceRecords = {
-    name: "absence-records",
     components: {
         "table-row": AbsenceTableRow,
     },
@@ -95,7 +94,7 @@ export const AbsenceRecords = {
                             </span>
                             条记录
                         </div>
-                        <nav class="col-md-9" aria-label="Page navigation">
+                        <nav class="col-md-9 pagerCenter" aria-label="Page navigation">
                             <ul class="pagination" style="display: flex; flex-wrap: wrap;">
                                 <li
                                     :class="['page-item', { disabled: isFirstPage }]"
@@ -151,7 +150,7 @@ export const AbsenceRecords = {
         currentPage: 1, // 当前页码
         pageSize: 5, // 页面显示数据量
         addModel: false, // 是否开启添加数据栏
-        newData: { ...emptyPerson }, // 新数据存储对象
+        newData: {...emptyPerson }, // 新数据存储对象
         selectedIds: [],
         searchForm: {
             name: "", // 名字搜索框
@@ -173,24 +172,11 @@ export const AbsenceRecords = {
             return this.currentPage == this.totalPage;
         },
         // 根据搜索条件筛选数据
+        // 时间搜索摸了
         filteredData() {
-            return this.data
-                .filter((v) => {
-                    return v.sname.includes(this.searchForm.name.trim())
-                })
-                .filter((v) => {
-                    if (this.searchForm.startTime == "" && this.searchForm.endTime == "") {
-                        return true
-                    }
-                    const date = new Date(v.date)
-                    let start = new Date(this.searchForm.startTime)
-                    let end = new Date(this.searchForm.endTime)
-
-                    if (this.searchForm.startTime && !this.searchForm.endTime) {
-                        return start < date
-                    }
-                    return start <= date && date <= end
-                });
+            return this.data.filter((v) =>
+                v.sname.includes(this.searchForm.name.trim())
+            );
         },
         // 显示当前页码在的数据
         viewData() {
@@ -255,12 +241,12 @@ export const AbsenceRecords = {
             this.newData.id = this.data[this.data.length - 1].id + 1;
             this.newData.date = this.newData.date.replace("T", " ");
             this.data.push(this.newData); // 添加新数据
-            this.newData = { ...emptyPerson }; // 清空添加数据栏内容
+            this.newData = {...emptyPerson }; // 清空添加数据栏内容
         },
         // 取消添加
         addCancel() {
             this.addModel = false; // 隐藏添加数据栏
-            this.newData = { ...emptyPerson }; // 清空添加数据栏内容
+            this.newData = {...emptyPerson }; // 清空添加数据栏内容
         },
     },
 };

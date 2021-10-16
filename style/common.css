@@ -1,5 +1,12 @@
 /** 公共部分css **/
 
 [v-cloak] {
-  display: none;
+    display: none;
+}
+
+.pagerCenter {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
 }

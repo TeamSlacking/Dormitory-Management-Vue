@@ -107,7 +107,7 @@ export const AdminManagement = {
                             </span>
                             条记录
                         </div>
-                        <nav class="col-md-9" aria-label="Page navigation">
+                        <nav class="col-md-9 pagerCenter" aria-label="Page navigation">
                             <ul class="pagination" style="display: flex; flex-wrap: wrap;">
                                 <li
                                     :class="['page-item', { disabled: isFirstPage }]"
