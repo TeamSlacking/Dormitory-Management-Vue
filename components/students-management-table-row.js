@@ -19,8 +19,8 @@ export const StudentsTableRow = {
                 <td><span>{{ profile.roomId }}</span></td>
                 <td>
                     <div>
-                        <button type="button" class="btn btn-outline-primary" @click="editMode = true" >编辑</button>
-                        <button type="button" class="btn btn-outline-danger" @click="del(profile.id)">删除</button>
+                        <button type="button" class="btn btn-sm btn-info mr-4 waves-effect waves-float waves-light" @click="editMode = true" >编辑</button>
+                        <button type="button" class="btn btn-sm btn-danger waves-effect waves-float waves-light" @click="del(profile.id)">删除</button>
                     </div>
                 </td>
             </template>
@@ -49,8 +49,8 @@ export const StudentsTableRow = {
                 <td><input v-model="profile.roomId" class="form-control" type="text" style="width: 121px;"/></td>
                 <td>
                     <div>
-                        <button type="button" class="btn btn-outline-primary mb-2" @click="save()">保存</button>
-                        <button type="button" class="btn btn-outline-danger mb-2" @click="cancel()">取消</button>
+                    <button type="button" class="btn btn-sm btn-info mr-4 waves-effect waves-float waves-light mb-2" @click="save()">保存</button>
+                    <button type="button" class="btn btn-sm btn-danger waves-effect waves-float waves-light mb-2" @click="cancel()">取消</button>
                     </div>
                 </td>
             </template>

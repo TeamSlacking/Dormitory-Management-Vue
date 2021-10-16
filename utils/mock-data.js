@@ -91,3 +91,4 @@ export function saveStudentAdmin(data) {
 export function saveDormitory(data) {
     localStorage.setItem("dormitory", JSON.stringify(data))
 }
+

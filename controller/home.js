@@ -10,10 +10,10 @@ const app = new Vue({
         "sakura-switch": SakuraSwitch,
     },
     data: () => ({
-        viewName: "主页",
+        viewName: sessionStorage.getItem("lastView"),
         avatarSrc: "./img/diana.jpg",
         userinfo: JSON.parse(sessionStorage.getItem("userinfo")),
-        system:getDormitory()
+        system:getDormitory(),
     }),
     provide: function() {
         return {
@@ -76,20 +76,6 @@ const app = new Vue({
         viewComponent() {
             const item = menu.find((item) => item.name === this.viewName);
             return item.component ?? IndexWelcome;
-        },
-        username() {
-            if (this.userinfo.type == userType.SystemAdmin) {
-                return userinfo.username
-            } else if (this.userinfo.type == userType.DormitoryAdmin) {
-                let username = this.system.find(item => item.username == this.userinfo.username);
-                    // 新的密码赋值给 找到的这条数据里面的password
-                    console.log(username);
-                // return username
-            } else if (this.userinfo.type == userType.Student) {
-                return "欢迎您，同学";
-            } else {
-                return "非法访问！"
-            }
         },
         welcome() {
             if (this.userinfo.type == userType.SystemAdmin) {

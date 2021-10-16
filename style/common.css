@@ -10,3 +10,6 @@
     justify-content: center;
     align-items: center;
 }
+.breadcrumb .breadcrumb-item+.breadcrumb-item::before {
+    content: "♥";
+}

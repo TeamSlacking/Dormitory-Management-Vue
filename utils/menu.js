@@ -5,6 +5,7 @@ import { BuildingManagement } from "../components/building-management.js";
 import { AbsenceRecords } from "../components/absence-records.js";
 import { ChangePassword } from "../components/change-password.js";
 import { userType } from "./user-type.js";
+import { HomeInfo } from "../components/home-info.js";
 
 const { SystemAdmin, DormitoryAdmin, Student } = userType
 
@@ -13,6 +14,11 @@ export const menu = [
     {
         name: "主页",
         component: HomeWelcome,
+        allows: [SystemAdmin, DormitoryAdmin, Student],
+    },
+    {
+        name: "个人信息",
+        component: HomeInfo,
         allows: [SystemAdmin, DormitoryAdmin, Student],
     },
     {

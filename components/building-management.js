@@ -32,8 +32,8 @@ export const BuildingManagement = {
                             </div>
                         </form>
                         <div style="float: right">
-                            <button type="button" class="btn btn-md btn-outline-success" @click="addModel = true">添加</button>
-                            <button type="button" class="btn btn-md btn-outline-danger" @click="delBatch()">批量删除</button>
+                            <button type="button" class="btn btn-sm btn-primary waves-effect waves-float waves-light" @click="addModel = true">添加</button>
+                            <button type="button" class="btn btn-sm btn-danger waves-effect waves-float waves-light" @click="delBatch()">批量删除</button>
                         </div>
                     </div>
         
@@ -64,8 +64,8 @@ export const BuildingManagement = {
                                         <td><input v-model="newData.admin" class="form-control" type="number" style="width: 145px" /></td>
                                         <td>
                                             <div class="btn-group" role="group">
-                                                <button type="button" class="btn btn-outline-primary" @click="addPerson()">添加</button>
-                                                <button type="button" class="btn btn-outline-danger" @click="addCancel()">取消</button>
+                                            <button type="button" class="btn btn-sm btn-primary waves-effect waves-float waves-light" @click="addPerson()">添加</button>
+                                            <button type="button" class="btn btn-sm btn-danger waves-effect waves-float waves-light" @click="addCancel()">取消</button>
                                             </div>
                                         </td>
                                     </tr>
@@ -74,14 +74,14 @@ export const BuildingManagement = {
                         </div>
                         <!-- 分页组件 -->
                         <div class="flex-content" style="display: flex;">
-                            <div class="col-md-2">
+                            <div class="col-md-2 pagerCenter">
                                 共
                                 <span class="badge pill badge-danger">
                                     {{ filteredData.length }}
                                 </span>
                                 条记录
                             </div>
-                            <nav class="col-md-9 pagerCenter" aria-label="Page navigation">
+                            <nav class="col-md-8 pagerCenter" aria-label="Page navigation">
                                 <ul class="pagination" style="display: flex; flex-wrap: wrap;">
                                     <li
                                         :class="['page-item', { disabled: isFirstPage }]"
@@ -116,7 +116,7 @@ export const BuildingManagement = {
                                     </li>
                                 </ul>
                             </nav>
-                            <div class="col-md-1">
+                            <div class="col-md-2 pagerCenter">
                                 <select v-model="pageSize" class="form-control" style="width: auto">
                                     <option :value="5">5</option>
                                     <option :value="10">10</option>

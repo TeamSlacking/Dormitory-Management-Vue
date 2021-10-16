@@ -18,7 +18,9 @@
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
     <script type="module" src="./controller/home.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    <link rel="stylesheet" href="./style/cool.css">
+    <link rel="stylesheet" href="./style/bootstrap-extended.css">
+    <link rel="stylesheet" href="./style/style-cyan.css">
 </head>
 
 <body>
@@ -31,7 +33,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">主页</a></li>
+                            <li class="breadcrumb-item"><a href="#" > {{viewName}} </a></li>
                             <li class="breadcrumb-item">
                         </ol>
                     </nav>
@@ -44,8 +46,10 @@
                             <sakura-switch />
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-                                <img id="avatar" class="avatar p-1 navbar-img rounded-circle" :src="avatarSrc" alt="Hz1">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                                aria-expanded="false">
+                                <img id="avatar" class="avatar p-1 navbar-img rounded-circle" :src="avatarSrc"
+                                    alt="Hz1">
                             </a>
                             <!-- 点击头像弹出 -->
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">

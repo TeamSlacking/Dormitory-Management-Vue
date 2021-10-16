@@ -7,8 +7,8 @@ const app = new Vue({
         student: getStudentAdmin(),
         system: getDormitoryAdmin(), //取出来的数据
         loginForm: {
-            username: localStorage.getItem("username") || localStorage.getItem("adminUser"),
-            password: localStorage.getItem("password") || localStorage.getItem("adminPass"),
+            username: localStorage.getItem("username") || '',
+            password: localStorage.getItem("password") || '',
             type: 0, //用户类型  0为系统管理员 1为宿舍管理员 2为学生 默认为0
             rem: true, //勾选记住密码  默认为false
         },

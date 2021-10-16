@@ -5,7 +5,7 @@ const template = `
             <div class="card">
                 <!-- 其余页面修改从这里开始直接注释下面的轮播图 -->
                 <!-- 表格标题 -->
-                <div class="card-header">
+                <div>
                     <!-- 轮播图开始 -->
                     <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
                         <ol class="carousel-indicators">
@@ -33,8 +33,7 @@ const template = `
                     <!-- 轮播图结束 -->
                     <!-- </div> 表格标题尾部div-->
                     <!-- 表格主体 -->
-                    <div class="card-body">
-                    </div>
+                    
                 </div>
             </div>
         </div>
