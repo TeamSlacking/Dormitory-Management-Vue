@@ -11,6 +11,11 @@ const app = new Vue({
         viewName: "主页",
         userinfo: JSON.parse(sessionStorage.getItem("userinfo")),
     }),
+    provide: function () {
+        return {
+            userinfo: this.userinfo
+        }
+    },
     methods: {
         Logout() {
             Swal.fire({

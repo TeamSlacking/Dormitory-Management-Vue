@@ -1,7 +1,7 @@
 import { StudentsTableRow } from "./students-management-table-row.js";
 import { dormitories } from "../utils/dormitories.js";
 import { validateStudentManagement } from "../utils/validator.js";
-import { getStudentAdmin } from "../utils/mock-data.js";
+import { getDormitoryAdmin, getStudentAdmin } from "../utils/mock-data.js";
 
 /** 空数据 */
 const emptyPerson = {
@@ -16,7 +16,7 @@ const emptyPerson = {
 
 
 export const StudentManagement = {
-    // name: "student-management",
+    name: "student-management",
 	components: {
 	    "table-row": StudentsTableRow,
 	},
@@ -159,6 +159,7 @@ export const StudentManagement = {
             </div>
         </div>
     `,
+    inject: ["userinfo"],
     data: () => ({
         // sname: "学生管理"
 		dormitories, // 宿舍楼列表
@@ -197,7 +198,13 @@ export const StudentManagement = {
                 (this.searchForm.phone ? v.phone.includes(this.searchForm.phone) : true) &&
                 (this.searchForm.gender == 0 || this.searchForm.gender == v.gender) &&
                 v.dormitory.includes(this.searchForm.dormitory)
-            );
+            ).filter((v) => {
+                if (this.userinfo.type == 0) {
+                    return true
+                }
+                const currentUser = getDormitoryAdmin().find(admin => admin.username == this.userinfo.username)
+                return v.dormitory == currentUser.dormitory
+            });
         },
         // 显示当前页码在的数据
         viewData() {
