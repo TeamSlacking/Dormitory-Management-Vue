@@ -22,6 +22,10 @@ export function getDormitoryAdmin() {
         }, ],
     });
     people.forEach(person => person.phone = String(person.phone))
-    localStorage.setItem("dormitoryAdmin", JSON.stringify(people))  //存data进localStorage
+    saveDormitoryAdmin(people)  //存data进localStorage
     return people
+}
+
+export function saveDormitoryAdmin(data) {
+    localStorage.setItem("dormitoryAdmin", JSON.stringify(data))
 }
