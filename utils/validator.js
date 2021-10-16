@@ -20,6 +20,25 @@ export function validateAdmin({ id, name, gender, phone, dormitory, username }) 
 }
 
 /**
+ * 验证学生管理对象数据合法性
+ * @param {{id: number; scode:string; sname: string; gender: 1 | 2; phone: string; dormitory: string, roomId: string}} StudentManagement
+ */
+export function validateStudentManagement({ id, scode,sname, gender, phone, dormitory, roomId }) {
+    if (scode == "") {
+        throw Error("所填的学号不合法");
+    }
+	if (sname == "") {
+        throw Error("所填的名字不合法");
+    }
+    if (!/^1(3|4|5|6|7|8|9)\d{9}$/.test(phone)) {
+        throw Error("所填的电话号码不合法");
+    }
+    if (!dormitories.includes(dormitory)) {
+        throw Error("所填的宿舍楼不合法");
+    }
+}
+
+/**
  * 验证缺勤记录对象数据合法性
  * 
  *@param {{id: number; schoolid: number; name: string; dormitory: string; room: number; date: datetime-local; beizhu: string}} AbsenceRecord
