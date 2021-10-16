@@ -1,19 +1,7 @@
 import { AbsenceTableRow } from "./absence-records-table-row.js";
 import { dormitories } from "../utils/dormitories.js";
 import { validateAbsenceRecord } from "../utils/validator.js"
-
-/** @type {{people:{id: number; name: string; gender: 1 | 2;  dormitory: string, username: string}[]}} */
-let data = Mock.mock({
-    "people|112": [{
-        "id|+1": 1,
-        name: "@cname",
-        room: "@integer(101, 601)",
-        date: '@datetime("2021-MM-dd HH:mm")',
-        beizhu: '@cparagraph(1)',
-        "dormitory|1": dormitories,
-        schoolid: "@integer(20210010, 20219999)",
-    },],
-});
+import { getStudentAdmin } from "../utils/mock-data.js";
 
 /** 空数据 */
 const emptyPerson = {
@@ -76,15 +64,15 @@ export const AbsenceRecords = {
                                 <tr v-if="addModel">
                                     <td></td>
                                     <td></td>
-                                    <td><input v-model="newData.schoolid" class="form-control" type="number"style="width: 110px;" /></td>
-                                    <td><input v-model="newData.name" class="form-control" type="text" style="width: 83px" /></td>
+                                    <td><input v-model="newData.scode" class="form-control" type="number"style="width: 110px;" /></td>
+                                    <td><input v-model="newData.sname" class="form-control" type="text" style="width: 83px" /></td>
                                     <td>
                                         <select v-model="newData.dormitory" class="form-control" style="width: 133px">
                                             <option value="">请选择宿舍楼</option>
                                             <option v-for="value in dormitories" :value="value">{{ value }}</option>
                                         </select>
                                     </td>
-                                    <td><input v-model="newData.room" class="form-control" type="number" style="width: 83px" /></td>
+                                    <td><input v-model="newData.roomId" class="form-control" type="number" style="width: 83px" /></td>
                                     <td><input v-model="newData.date" class="form-control" type="datetime-local" style="width: 150px" /></td>
                                     <td><textarea v-model="newData.beizhu" class="form-control" type="text" /></td>
                                     <td>
@@ -158,7 +146,7 @@ export const AbsenceRecords = {
         tit: "缺勤记录",
         dormitories, // 宿舍楼列表
         header: ["序号", "学号", "姓名", "宿舍楼", "寝室", "日期", "备注", "操作"], // 表头
-        data: data.people, // mock.js 生成的数据
+        data: getStudentAdmin(), // mock.js 生成的数据
         currentPage: 1, // 当前页码
         pageSize: 5, // 页面显示数据量
         addModel: false, // 是否开启添加数据栏
@@ -187,7 +175,7 @@ export const AbsenceRecords = {
         // 时间搜索摸了
         filteredData() {
             return this.data.filter((v) =>
-            v.name.includes(this.searchForm.name.trim())
+            v.sname.includes(this.searchForm.name.trim())
             );
         },
         // 显示当前页码在的数据

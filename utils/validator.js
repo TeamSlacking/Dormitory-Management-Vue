@@ -41,19 +41,19 @@ export function validateStudentManagement({ id, scode,sname, gender, phone, dorm
 /**
  * 验证缺勤记录对象数据合法性
  * 
- *@param {{id: number; schoolid: number; name: string; dormitory: string; room: number; date: datetime-local; beizhu: string}} AbsenceRecord
+ *@param {{id: number; scode: string; name: string; dormitory: string; room: number; date: datetime-local; beizhu: string}} AbsenceRecord
  */
-export function validateAbsenceRecord({ id, schoolid, name, dormitory, room, date, beizhu }) {
-    if (schoolid == "") {
+export function validateAbsenceRecord({ id, scode, sname, dormitory, roomId, date, beizhu }) {
+    if (scode == "") {
         throw Error("所填的学号不合法");
     }
-    if (name == "") {
+    if (sname == "") {
         throw Error("所填的名字不合法");
     }
     if (!dormitories.includes(dormitory)) {
         throw Error("所填的宿舍楼不合法");
     }
-    if (room == "") {
+    if (roomId == "") {
         throw Error("所填的寝室不合法");
     }
     if (date == "") {

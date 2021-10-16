@@ -11,10 +11,10 @@ export const AbsenceTableRow = {
                 <span>{{ profile.id }}</span>
             </td>
             <template v-if="!editMode">
-                <td><span>{{ profile.schoolid }}</span></td>
-                <td><span>{{ profile.name }}</span></td>
+                <td><span>{{ profile.scode }}</span></td>
+                <td><span>{{ profile.sname }}</span></td>
                 <td><span>{{ profile.dormitory}}</span></td>
-                <td><span>{{ profile.room }}</span></td>
+                <td><span>{{ profile.roomId }}</span></td>
                 <td><span>{{ time(profile.date) }}</span></td>
                 <td><span>{{ profile.beizhu }}</span></td>
                 <td>
@@ -26,10 +26,10 @@ export const AbsenceTableRow = {
             </template>
             <template v-else>
                 <td>
-                    <input v-model="profile.schoolid" class="form-control" type="number" style="width: 110px;"/>
+                    <input v-model="profile.scode" class="form-control" type="number" style="width: 110px;"/>
                 </td>
                 <td>
-                    <input v-model="profile.name" class="form-control" type="text" style="width: 83px;"/>
+                    <input v-model="profile.sname" class="form-control" type="text" style="width: 83px;"/>
                 </td>
                 <td>
                     <select v-model="profile.dormitory" class="form-control" style="width: 122px;">
@@ -38,7 +38,7 @@ export const AbsenceTableRow = {
                     </select>
                 </td>
                 <td>
-                    <input v-model="profile.room" class="form-control" type="number" style="width: 83px;"/>
+                    <input v-model="profile.roomId" class="form-control" type="number" style="width: 83px;"/>
                 </td>
                 <td>
                     <input v-model="profile.date" class="form-control" type="datetime-local" style="width: 150px;"/>

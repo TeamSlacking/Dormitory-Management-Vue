@@ -46,7 +46,9 @@ export function getStudentAdmin() {
             phone: "@integer(13000000000, 19999999999)",
             "dormitory|1": dormitories,
             "roomId": /\d{3}/,
-            password: "123"
+            password: "123",
+            date: '@datetime("2021-MM-dd HH:mm")',
+            beizhu: '@cparagraph(1)',
         },],
     });
     people.forEach(person => person.phone = String(person.phone))
