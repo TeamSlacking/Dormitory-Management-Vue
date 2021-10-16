@@ -15,6 +15,7 @@ const emptyPerson = {
 };
 
 export const AbsenceRecords = {
+    name: "absence-records",
     components: {
         "table-row": AbsenceTableRow,
     },
@@ -172,11 +173,24 @@ export const AbsenceRecords = {
             return this.currentPage == this.totalPage;
         },
         // 根据搜索条件筛选数据
-        // 时间搜索摸了
         filteredData() {
-            return this.data.filter((v) =>
-            v.sname.includes(this.searchForm.name.trim())
-            );
+            return this.data
+                .filter((v) => {
+                    return v.sname.includes(this.searchForm.name.trim())
+                })
+                .filter((v) => {
+                    if (this.searchForm.startTime == "" && this.searchForm.endTime == "") {
+                        return true
+                    }
+                    const date = new Date(v.date)
+                    let start = new Date(this.searchForm.startTime)
+                    let end = new Date(this.searchForm.endTime)
+
+                    if (this.searchForm.startTime && !this.searchForm.endTime) {
+                        return start < date
+                    }
+                    return start <= date && date <= end
+                });
         },
         // 显示当前页码在的数据
         viewData() {
