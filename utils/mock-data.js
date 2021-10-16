@@ -54,6 +54,41 @@ export function getStudentAdmin() {
     return people
 }
 
+/** 
+ * 
+ * @returns {{id: number; name: string; bio: string; admin: string}[]}} 
+ * 
+ * */
+
+ export function getDormitory() {
+    const dormitory = localStorage.getItem("dormitory")
+    if(dormitory) {
+        return JSON.parse(dormitory)
+    }
+    
+    let { people } = Mock.mock({
+        "people|9": [{
+            "id|+1": 1,
+            name: "@cname",
+            "bio": "",
+            "admin|1": [
+                "@cname",
+                "@cname @cname",
+                "@cname @cname @cname",
+                "@cname @cname @cname @cname",
+                "@cname @cname @cname @cname @cname",
+                "@cname @cname @cname @cname @cname @cname",
+            ],
+        }, ],
+    });
+    people.forEach((p, i) => {
+        p.name = dormitories[i],
+        p.bio = `这里是${dormitories[i]}， 位于XXX`
+    })
+    saveDormitory(people)  //存data进localStorage
+    return people
+}
+
 
 export function saveDormitoryAdmin(data) {
     localStorage.setItem("dormitoryAdmin", JSON.stringify(data))
@@ -61,4 +96,8 @@ export function saveDormitoryAdmin(data) {
 
 export function saveStudentAdmin(data) {
     localStorage.setItem("studentAdmin", JSON.stringify(data))
+}
+
+export function saveDormitory(data) {
+    localStorage.setItem("dormitory", JSON.stringify(data))
 }
