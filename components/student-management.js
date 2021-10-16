@@ -1,20 +1,9 @@
 import { StudentsTableRow } from "./students-management-table-row.js";
 import { dormitories } from "../utils/dormitories.js";
 import { validateStudentManagement } from "../utils/validator.js";
+import { getStudentAdmin } from "../utils/mock-data.js";
 
-/** @type {{people:{id: number; scode:string; sname: string; gender: 1 | 2; phone: string; dormitory: string, roomId: string}[]}} */
-let data = Mock.mock({
-    "people|100": [{
-        "id|+1": 1,
-		scode: "@integer(20210010, 20219999)",
-		sname: "@cname",
-        "gender|1": [1, 2],
-        phone: "@integer(13000000000, 19999999999)",
-        "dormitory|1": dormitories,
-        "roomId": /\d{3}/,
-        password: "123"
-    }, ],
-});
+
 
 /** 空数据 */
 const emptyPerson = {
@@ -176,7 +165,7 @@ export const StudentManagement = {
         // sname: "学生管理"
 		dormitories, // 宿舍楼列表
 		header: ["序号","学号","姓名","性别","电话","宿舍楼","寝室","操作"], // 表头
-		data: data.people, // mock.js 生成的数据
+		data: getStudentAdmin(), // mock.js 生成的数据
 		currentPage: 1, // 当前页码
 		pageSize: 5, // 页面显示数据量
 		addModel: false, // 是否开启添加数据栏

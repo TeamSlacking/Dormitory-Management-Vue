@@ -26,6 +26,39 @@ export function getDormitoryAdmin() {
     return people
 }
 
+/**
+ * 
+ * @returns {{id: number; scode: string; sname: string; gender: 1 | 2; phone: string; dormitory: string; roomId: number;}[]}
+ */
+
+export function getStudentAdmin() {
+    const student = localStorage.getItem("studentAdmin")
+    if(student) {
+        return JSON.parse(student)
+    }
+    
+    let { people } = Mock.mock({
+        "people|100": [{
+            "id|+1": 1,
+            scode: "@integer(20210010, 20219999)",
+            sname: "@cname",
+            "gender|1": [1, 2],
+            phone: "@integer(13000000000, 19999999999)",
+            "dormitory|1": dormitories,
+            "roomId": /\d{3}/,
+            password: "123"
+        }, ],
+    });
+    people.forEach(person => person.phone = String(person.phone))
+    saveStudentAdmin(people)  //存data进localStorage
+    return people
+}
+
+
 export function saveDormitoryAdmin(data) {
     localStorage.setItem("dormitoryAdmin", JSON.stringify(data))
+}
+
+export function saveStudentAdmin(data) {
+    localStorage.setItem("studentAdmin", JSON.stringify(data))
 }

@@ -112,13 +112,13 @@ export const AbsenceRecords = {
                                     :class="['page-item', { disabled: isFirstPage }]"
                                     @click="!isFirstPage && (currentPage = 1)"
                                 >
-                                    <a href="#" class="page-link">Home</a>
+                                    <a href="#" class="page-link">首页</a>
                                 </li>
                                 <li
                                     :class="['page-item', { disabled: isFirstPage }]"
                                     @click="!isFirstPage && (currentPage = currentPage - 1)"
                                 >
-                                    <a href="#" class="page-link">Previous</a>
+                                    <a href="#" class="page-link">上一页</a>
                                 </li>
                                 <li
                                     v-for="i in totalPage"
@@ -131,13 +131,13 @@ export const AbsenceRecords = {
                                     :class="['page-item', { disabled: isLastPage }]"
                                     @click="currentPage < totalPage && (currentPage += 1)"
                                 >
-                                    <a href="#" class="page-link">Next</a>
+                                    <a href="#" class="page-link">下一页</a>
                                 </li>
                                 <li
                                     :class="['page-item', { disabled: isLastPage }]"
                                     @click="currentPage != totalPage && (currentPage = totalPage)"
                                 >
-                                    <a href="#" class="page-link">Last</a>
+                                    <a href="#" class="page-link">尾页</a>
                                 </li>
                             </ul>
                         </nav>
