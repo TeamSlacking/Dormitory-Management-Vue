@@ -3,8 +3,6 @@ import { dormitories } from "../utils/dormitories.js";
 import { validateStudentManagement } from "../utils/validator.js";
 import { getStudentAdmin } from "../utils/mock-data.js";
 
-
-
 /** 空数据 */
 const emptyPerson = {
     id: Infinity,
@@ -78,7 +76,7 @@ export const StudentManagement = {
                                     <tr v-if="addModel">
                                         <td></td>
                                         <td></td>
-										<td><input v-model="newData.code" class="form-control" type="text" style="width: 83px" /></td>
+										<td><input v-model="newData.scode" class="form-control" type="text" style="width: 83px" /></td>
                                         <td><input v-model="newData.sname" class="form-control" type="text" style="width: 83px" /></td>
                                         <td>
                                             <select v-model="newData.gender" class="form-control" style="width: 63px">
