@@ -2,6 +2,7 @@ import { menu } from "../utils/menu.js";
 import { userType } from "../utils/user-type.js";
 import { SakuraSwitch } from "../components/sakura-switch.js";
 import { loadAvatar, storeAvatar } from "../utils/avatar.js";
+import { getDormitory } from "../utils/mock-data.js";
 
 const app = new Vue({
     el: "#app",
@@ -12,6 +13,7 @@ const app = new Vue({
         viewName: "主页",
         avatarSrc: "./img/diana.jpg",
         userinfo: JSON.parse(sessionStorage.getItem("userinfo")),
+        system:getDormitory()
     }),
     provide: function() {
         return {
@@ -74,6 +76,20 @@ const app = new Vue({
         viewComponent() {
             const item = menu.find((item) => item.name === this.viewName);
             return item.component ?? IndexWelcome;
+        },
+        username() {
+            if (this.userinfo.type == userType.SystemAdmin) {
+                return userinfo.username
+            } else if (this.userinfo.type == userType.DormitoryAdmin) {
+                let username = this.system.find(item => item.username == this.userinfo.username);
+                    // 新的密码赋值给 找到的这条数据里面的password
+                    console.log(username);
+                // return username
+            } else if (this.userinfo.type == userType.Student) {
+                return "欢迎您，同学";
+            } else {
+                return "非法访问！"
+            }
         },
         welcome() {
             if (this.userinfo.type == userType.SystemAdmin) {

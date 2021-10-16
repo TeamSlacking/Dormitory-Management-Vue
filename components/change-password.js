@@ -55,7 +55,15 @@ export const ChangePassword = {
 
             if (this.oldPass == this.userinfo.password) {
                 if (this.userinfo.type == 0) {
-
+                    this.userinfo.password = this.newPass;
+                    localStorage.setItem("adminPass", this.userinfo.password);
+                    Swal.fire({
+                        icon: 'success',
+                        title: '成功',
+                        text: '修改密码成功！',
+                        button: 'ok！',
+                    })
+                    setTimeout("location.href = './index.html'", 1000)
                 } else if (this.userinfo.type == 1) {
                     // 定义dormitoryAdmin   从getDormitoryAdmin()的数据里面遍历寻找当前账户的密码和当前账户账号
                     let dormitoryAdmin = this.system.find(item => item.password == this.oldPass && item.username == this.userinfo.username);

@@ -7,17 +7,25 @@ const app = new Vue({
         student: getStudentAdmin(),
         system: getDormitoryAdmin(), //取出来的数据
         loginForm: {
-            username: localStorage.getItem("username") || '',
-            password: localStorage.getItem("password") || '',
+            username: localStorage.getItem("username") || localStorage.getItem("adminUser"),
+            password: localStorage.getItem("password") || localStorage.getItem("adminPass"),
             type: 0, //用户类型  0为系统管理员 1为宿舍管理员 2为学生 默认为0
             rem: true, //勾选记住密码  默认为false
-        }
+        },
+        admin: {
+            user:localStorage.getItem("adminUser"),
+            pass:localStorage.getItem("adminPass"),
+         },
     },
     methods: {
         /** @param {KeyboardEvent} event */
         keyup(event) {
             event.key === "Enter" && this.login()
         },
+        admin: {
+            user:localStorage.setItem('adminUser', 'admin'),
+            pass:localStorage.setItem('adminPass', '123')
+         },
         login() {
             //验证
             if (this.loginForm.username == "") {
@@ -59,13 +67,13 @@ const app = new Vue({
             }
             //系统管理员登录
             if (this.loginForm.type == 0) {
-                if (this.loginForm.username == "admin" && this.loginForm.password == "123") {
+                if (this.loginForm.username == this.admin.user && this.loginForm.password == this.admin.pass) {
                     if (this.loginForm.rem) {
-                        localStorage.setItem("username", this.loginForm.username);
-                        localStorage.setItem("password", this.loginForm.password);
+                        localStorage.setItem("adminUser", this.loginForm.username);
+                        localStorage.setItem("adminPass", this.loginForm.password);
                     } else {
-                        localStorage.removeItem("username");
-                        localStorage.removeItem("password");
+                        localStorage.removeItem("adminUser");
+                        localStorage.removeItem("adminPass");
                     }
                     sessionStorage.setItem("menu", JSON.stringify(menu));
                     sessionStorage.setItem("userinfo", JSON.stringify(this.loginForm))
@@ -141,9 +149,9 @@ const app = new Vue({
                     return;
                 }
             }
-        }
+        },
     },
     computed: {
-
+        
     },
 })
