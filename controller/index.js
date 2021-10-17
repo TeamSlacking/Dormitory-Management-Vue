@@ -12,20 +12,16 @@ const app = new Vue({
             type: 0, //用户类型  0为系统管理员 1为宿舍管理员 2为学生 默认为0
             rem: true, //勾选记住密码  默认为false
         },
-        admin: {
-            user:localStorage.getItem("adminUser"),
-            pass:localStorage.getItem("adminPass"),
-         },
+    },
+    created() {
+        localStorage.setItem('adminUser', 'admin'),
+        localStorage.setItem('adminPass', '123')
     },
     methods: {
         /** @param {KeyboardEvent} event */
         keyup(event) {
             event.key === "Enter" && this.login()
         },
-        admin: {
-            user:localStorage.setItem('adminUser', 'admin'),
-            pass:localStorage.setItem('adminPass', '123')
-         },
         login() {
             //验证
             if (this.loginForm.username == "") {
@@ -67,7 +63,9 @@ const app = new Vue({
             }
             //系统管理员登录
             if (this.loginForm.type == 0) {
-                if (this.loginForm.username == this.admin.user && this.loginForm.password == this.admin.pass) {
+                const user = localStorage.getItem("adminUser")
+                const pass = localStorage.getItem("adminPass")
+                if (this.loginForm.username == user && this.loginForm.password == pass) {
                     if (this.loginForm.rem) {
                         localStorage.setItem("adminUser", this.loginForm.username);
                         localStorage.setItem("adminPass", this.loginForm.password);
