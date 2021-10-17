@@ -8,7 +8,7 @@ const template = `
         <div class="col-lg-3 order-lg-2">
             <div class="card-profile-image">
                 <a href="#">
-                    <img :src="avatarSrc" class="rounded-circle">
+                    <img :src="userinfo.avatarSrc" class="rounded-circle">
                 </a>
             </div>
         </div>
@@ -31,7 +31,6 @@ const template = `
         </div>
         <div class="text-center">
             <h5 class="h3" style="padding:0.8em">{{ userinfo.username }}</h5>
-            <button class="btn btn-sm btn-danger waves-effect waves-float waves-light" style="color:white" data-toggle="modal" data-target="#delete-account-modal">删除账号</button>
         </div>
     </div>
 </div>
@@ -42,10 +41,4 @@ export const HomeInfo = {
   name: "home-info",
   template,
   inject: ["userinfo"],
-  computed: {
-      avatarSrc() {
-        //   return loadAvatar(this.userinfo.username);
-        return this.userinfo.avatarSrc
-      },
-  },
 };
