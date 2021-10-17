@@ -57,6 +57,8 @@ export const ChangePassword = {
                 if (this.userinfo.type == 0) {
                     this.userinfo.password = this.newPass;
                     localStorage.setItem("adminPass", this.userinfo.password);
+                    localStorage.setItem("username","admin");
+                    localStorage.setItem("password",this.userinfo.password);
                     Swal.fire({
                         icon: 'success',
                         title: '成功',

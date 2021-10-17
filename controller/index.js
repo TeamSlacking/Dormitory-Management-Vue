@@ -14,8 +14,12 @@ const app = new Vue({
         },
     },
     created() {
-        localStorage.setItem('adminUser', 'admin'),
-        localStorage.setItem('adminPass', '123')
+        if(localStorage.getItem('adminUser') == '' || localStorage.getItem('adminUser') == null){
+            localStorage.setItem('adminUser', 'admin');
+        }
+        if(localStorage.getItem('adminUser') == '' || localStorage.getItem('adminUser') == null){
+            localStorage.setItem('adminPass', '123');
+        }
     },
     methods: {
         /** @param {KeyboardEvent} event */

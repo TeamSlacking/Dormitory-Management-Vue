@@ -29,7 +29,7 @@ const app = new Vue({
         Logout() {
             Swal.fire({
                 title: '你确定吗？',
-                text: "你确定要注销系统吗？",
+                text: "你确定要注销系统吗？注销账号会导致清空所有账号信息！",
                 icon: 'question',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -66,6 +66,8 @@ const app = new Vue({
                         }
                     })
                     sessionStorage.clear();
+                    localStorage.removeItem("password");
+                    localStorage.removeItem("username");
                     setTimeout("location.href = './index.html'", 3000)
                 }
             })
