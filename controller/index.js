@@ -72,7 +72,7 @@ const app = new Vue({
                 if (this.loginForm.username == user && this.loginForm.password == pass) {
                     if (this.loginForm.rem) {
                         localStorage.setItem("adminUser", this.loginForm.username);
-                        localStorage.setItem("adminPass", this.loginForm.password);
+                        localStorage.setItem("password", this.loginForm.password);
                     } else {
                         localStorage.removeItem("adminUser");
                         localStorage.removeItem("adminPass");
