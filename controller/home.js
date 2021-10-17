@@ -109,6 +109,19 @@ const app = new Vue({
         },
     },
     mounted() {
+        if (!this.userinfo) {
+            Swal.fire({
+                position: 'middle',
+                icon: 'error',
+                title: '暂未登录，稍后跳转回登录界面',
+                showConfirmButton: false,
+                timer: 3000
+            })
+            .then(() => {
+                location.href = "./index.html"
+            })
+            return
+        }
         const viewName = sessionStorage.getItem("lastView")
         if (viewName) {
             this.viewName = viewName
