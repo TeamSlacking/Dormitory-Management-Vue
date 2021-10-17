@@ -33,15 +33,22 @@
             <!-- 左边 -->
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <a class="navbar-brand" href="#">宿舍管理系统</a>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <nav aria-label="breadcrumb">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#" > {{viewName}} </a></li>
-                            <li class="breadcrumb-item">
+                        <li class="nav-item active breadcrumb-item"><a href="#">{{viewName}}</a></li>
+                        <li class="breadcrumb-item"></li>
                         </ol>
-                    </nav>
-                    <span>{{name}} </span>
-                    <span> {{welcome}} </span>
+                    </ul>
+                    <ul>
+                        <span>{{name}} </span>
+                    </ul>
+                    <ul>
+                        <span> {{welcome}} </span>
+                    </ul>
                     <!-- 头像 -->
                     <ul class="navbar-nav navbar-nav-right">
                         <li class="nav-item" style="display: flex; align-items: center; column-gap: 5px;">
