@@ -82,7 +82,9 @@
                 </div>
                 <!-- 左边结束 -->
                 <!-- 其余内容开始 -->
-                <component :is="viewComponent"></component>
+                <transition name="slide-fade">
+                    <component :is="viewComponent" />
+                </transition>
             </div>
         </div>
 

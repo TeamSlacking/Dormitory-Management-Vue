@@ -86,3 +86,36 @@ body {
     justify-content: center;
     padding: 8.5px;
 }
+
+body {
+    overflow-x: hidden;
+}
+
+.slide-fade-enter-active {
+    transition: all .3s ease-out .3s;
+}
+.slide-fade-leave-active {
+    transition: all .3s ease-out;
+}
+.slide-fade-enter {
+    transform: translateX(-100%);
+    opacity: 0;
+}
+
+.slide-fade-leave-to {
+    transform: translateX(100%);
+    opacity: 0;
+}
+
+tbody > tr {
+    transition: all .3s ease-out;
+}
+
+.list-complete-enter, .list-complete-leave-to {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.list-complete-leave-active {
+  position: absolute;
+}

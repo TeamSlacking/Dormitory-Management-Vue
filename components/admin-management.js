@@ -60,7 +60,8 @@ export const AdminManagement = {
                                 </th>
                                 <th v-for="value in header" class="text-center">{{ value }}</th>
                             </thead>
-                            <tbody class="text-center">
+                            
+                            <transition-group class="text-center" name="list-complete" tag="tbody">
                                 <!-- 渲染数据 -->
                                 <template v-for="(profile, index) in viewData">
                                     <table-row :profile="profile" :key="profile.id" @del="del">
@@ -70,7 +71,7 @@ export const AdminManagement = {
                                     </table-row>
                                 </template>
                                 <!-- 添加数据栏 -->
-                                <tr v-if="addModel">
+                                <tr v-if="addModel" :key="'addTr'">
                                     <td></td>
                                     <td></td>
                                     <td><input v-model="newData.name" class="form-control" type="text" style="width: 83px" /></td>
@@ -95,7 +96,7 @@ export const AdminManagement = {
                                         </div>
                                     </td>
                                 </tr>
-                            </tbody>
+                            </transition-group>
                         </table>
                     </div>
                     <!-- 分页组件 -->
