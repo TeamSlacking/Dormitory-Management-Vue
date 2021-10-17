@@ -17,7 +17,7 @@ const app = new Vue({
         if(localStorage.getItem('adminUser') == '' || localStorage.getItem('adminUser') == null){
             localStorage.setItem('adminUser', 'admin');
         }
-        if(localStorage.getItem('adminUser') == '' || localStorage.getItem('adminUser') == null){
+        if(localStorage.getItem('adminPass') == '' || localStorage.getItem('adminPass') == null){
             localStorage.setItem('adminPass', '123');
         }
     },
