@@ -19,11 +19,11 @@ const template = `
             <div class="col">
                 <div class="card-profile-stats d-flex" style="justify-content: space-evenly;">
                     <div>
-                        <span class="heading">SystemAdmin</span>
+                        <span class="heading">{{ typeText }}</span>
                         <span class="description">类型</span>
                     </div>
                     <div>
-                        <span class="heading">最高</span>
+                        <span class="heading">{{ permissionType }}</span>
                         <span class="description">权限</span>
                     </div>
                 </div>
@@ -41,4 +41,20 @@ export const HomeInfo = {
   name: "home-info",
   template,
   inject: ["userinfo"],
+  computed: {
+      typeText() {
+          switch (Number(this.userinfo.type)) {
+              case 0: return "系统管理员"
+              case 1: return "宿舍管理员"
+              default: return "学生"
+          }
+      },
+      permissionType() {
+        switch (Number(this.userinfo.type)) {
+            case 0: return "最高"
+            case 1: return "中等"
+            default: return "最低"
+        }
+    }
+  },
 };
