@@ -27,7 +27,7 @@ export const AbsenceRecords = {
                 <div class="card-header index-card-header">
                     <!-- 搜索栏 -->
                     <form action="#" id="search_form" class="form-inline">
-                        <div class="mb-2 mr-sm-2">
+                        <div v-if="this.userinfo.type != 2" class="mb-2 mr-sm-2">
                             <input v-model="searchForm.name" type="text" class="form-control" placeholder="姓名"  />
                         </div>
                         <div class="mb-2 mr-sm-2">
@@ -37,7 +37,7 @@ export const AbsenceRecords = {
                             <input v-model="searchForm.endTime" type="datetime-local" class="form-control" value="" />
                         </div>
                     </form>
-                    <div style="float: right">
+                    <div v-if="this.userinfo.type != 2" style="float: right">
                         <button type="button" class="btn btn-sm btn-primary waves-effect waves-float waves-light" @click="addModel = true">添加</button>
                         <button type="button" class="btn btn-sm btn-danger waves-effect waves-float waves-light" @click="delBatch()">批量删除</button>
                     </div>
@@ -146,8 +146,10 @@ export const AbsenceRecords = {
     inject: ["userinfo"],
     data: () => ({
         tit: "缺勤记录",
+        tittest:"test",
         dormitories, // 宿舍楼列表
         header: ["序号", "学号", "姓名", "宿舍楼", "寝室", "日期", "备注", "操作"], // 表头
+        studHeader: ["序号", "学号", "姓名", "宿舍楼", "寝室", "日期", "备注"], // 学生表头
         data: getStudentAdmin(), // mock.js 生成的数据
         currentPage: 1, // 当前页码
         pageSize: 5, // 页面显示数据量
@@ -277,5 +279,12 @@ export const AbsenceRecords = {
             this.addModel = false; // 隐藏添加数据栏
             this.newData = { ...emptyPerson }; // 清空添加数据栏内容
         },
+        //表头权限
+        header() {
+            if (this.userinfo.type != 2) {
+                return this.header
+            }
+
+        }
     },
 };

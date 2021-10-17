@@ -18,9 +18,12 @@ export const AbsenceTableRow = {
                 <td><span>{{ time(profile.date) }}</span></td>
                 <td><span>{{ profile.beizhu }}</span></td>
                 <td>
-                    <div>
+                    <div v-if="this.userinfo.type != 2">
                         <button type="button" class="btn btn-sm btn-info mr-4 waves-effect waves-float waves-light" @click="editMode = true" >编辑</button>
                         <button type="button" class="btn btn-sm btn-danger waves-effect waves-float waves-light" @click="del(profile.id)">删除</button>
+                    </div>
+                    <div v-else>
+                        <span>禁止</span>
                     </div>
                 </td>
             </template>
@@ -59,6 +62,7 @@ export const AbsenceTableRow = {
             required: true,
         },
     },
+    inject: ["userinfo"],
     data: () => ({
         dormitories, // 宿舍楼列表
         editMode: false, // 显示编辑框
