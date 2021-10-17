@@ -1,7 +1,7 @@
 import { AbsenceTableRow } from "./absence-records-table-row.js";
 import { dormitories } from "../utils/dormitories.js";
 import { validateAbsenceRecord } from "../utils/validator.js"
-import { getStudentAdmin } from "../utils/mock-data.js";
+import { getDormitoryAdmin, getStudentAdmin } from "../utils/mock-data.js";
 
 /** 空数据 */
 const emptyPerson = {
@@ -143,6 +143,7 @@ export const AbsenceRecords = {
         </div>
     </div>
     `,
+    inject: ["userinfo"],
     data: () => ({
         tit: "缺勤记录",
         dormitories, // 宿舍楼列表
@@ -151,7 +152,7 @@ export const AbsenceRecords = {
         currentPage: 1, // 当前页码
         pageSize: 5, // 页面显示数据量
         addModel: false, // 是否开启添加数据栏
-        newData: {...emptyPerson }, // 新数据存储对象
+        newData: { ...emptyPerson }, // 新数据存储对象
         selectedIds: [],
         searchForm: {
             name: "", // 名字搜索框
@@ -189,6 +190,21 @@ export const AbsenceRecords = {
                         return start < date
                     }
                     return start <= date && date <= end
+                })
+                .filter((v) => {
+                    if (this.userinfo.type == 0) {
+                        return true
+                    }
+                    if (this.userinfo.type == 1) {
+                        const currentUser = getDormitoryAdmin().find(admin => admin.username == this.userinfo.username)
+                        // return true
+                        return v.dormitory == currentUser.dormitory
+                    }
+                    if (this.userinfo.type == 2) {
+                        const currentUser = getStudentAdmin().find(student => student.scode == this.userinfo.username)
+                        return v.scode == currentUser.scode
+                        // return true
+                    }
                 });
         },
         // 显示当前页码在的数据
@@ -254,12 +270,12 @@ export const AbsenceRecords = {
             this.newData.id = this.data[this.data.length - 1].id + 1;
             this.newData.date = this.newData.date.replace("T", " ");
             this.data.push(this.newData); // 添加新数据
-            this.newData = {...emptyPerson }; // 清空添加数据栏内容
+            this.newData = { ...emptyPerson }; // 清空添加数据栏内容
         },
         // 取消添加
         addCancel() {
             this.addModel = false; // 隐藏添加数据栏
-            this.newData = {...emptyPerson }; // 清空添加数据栏内容
+            this.newData = { ...emptyPerson }; // 清空添加数据栏内容
         },
     },
 };
