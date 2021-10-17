@@ -11,7 +11,6 @@ const app = new Vue({
     },
     data: () => ({
         viewName: sessionStorage.getItem("lastView") || "主页",
-        avatarSrc: "./img/diana.jpg",
         userinfo: JSON.parse(sessionStorage.getItem("userinfo")),
         system:getDormitory(),
         dorm:sessionStorage.getItem("dormUser"),
@@ -19,12 +18,36 @@ const app = new Vue({
     }),
     provide: function() {
         return {
-            userinfo: this.userinfo
+            userinfo: this.userinfo,
         }
     },
+    mounted() {
+        if (!this.userinfo) {
+            Swal.fire({
+                position: 'middle',
+                icon: 'error',
+                title: '暂未登录，稍后跳转回登录界面',
+                showConfirmButton: false,
+                timer: 3000
+            })
+            .then(() => {
+                location.href = "./index.html"
+            })
+            return
+        }
+        const viewName = sessionStorage.getItem("lastView")
+        if (viewName) {
+            this.viewName = viewName
+        }
+        const avatarSrc = loadAvatar(this.userinfo.username) ?? "./img/diana.jpg"
+        this.setAvatar(avatarSrc)
+    },
     methods: {
+        setAvatar(src) {
+            this.$set(this.userinfo, 'avatarSrc', src)
+        },
         storeAvatar(username) {
-            storeAvatar(username, (src) => this.avatarSrc = src)
+            storeAvatar(username, this.setAvatar)
         },
         Logout() {
             Swal.fire({
@@ -71,7 +94,7 @@ const app = new Vue({
                     setTimeout("location.href = './index.html'", 3000)
                 }
             })
-        }
+        },
     },
     computed: {
         menu() {
@@ -82,7 +105,7 @@ const app = new Vue({
             return item.component ?? IndexWelcome;
         },
         name(){
-            if(this.userinfo.type == userType.SystemAdmin){
+            if (this.userinfo.type == userType.SystemAdmin){
                 return this.userinfo.username
             } else if (this.userinfo.type == userType.DormitoryAdmin) {
                 return this.dorm;
@@ -100,32 +123,12 @@ const app = new Vue({
             } else {
                 return "非法访问！"
             }
-        }
+        },
     },
     watch: {
         /** @param {string} value */
         viewName(value) {
             sessionStorage.setItem("lastView", value)
         },
-    },
-    mounted() {
-        if (!this.userinfo) {
-            Swal.fire({
-                position: 'middle',
-                icon: 'error',
-                title: '暂未登录，稍后跳转回登录界面',
-                showConfirmButton: false,
-                timer: 3000
-            })
-            .then(() => {
-                location.href = "./index.html"
-            })
-            return
-        }
-        const viewName = sessionStorage.getItem("lastView")
-        if (viewName) {
-            this.viewName = viewName
-        }
-        this.avatarSrc = loadAvatar(this.userinfo.username) ?? this.avatarSrc
     },
 });
