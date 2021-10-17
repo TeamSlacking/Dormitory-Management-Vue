@@ -25,7 +25,8 @@ export function storeAvatar(username, callback) {
                 localStorage.setItem(`users.${username}.avatar`, base64)
                 callback(base64)
             } catch (error) {
-                alert(`更换背景失败，可以检查图片文件大小是否过大。${error}`)
+                alert(`更换背景失败，可以检查图片文件大小是否过大。`)
+                console.log(error)
             }
         }
         reader.readAsDataURL(file)
