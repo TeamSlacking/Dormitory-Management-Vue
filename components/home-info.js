@@ -1,5 +1,3 @@
-import { loadAvatar } from "../utils/avatar.js";
-
 const template = `
 <div class="col-md-10 col-xl-4 order-xl-2">
 <div class="card card-profile">
