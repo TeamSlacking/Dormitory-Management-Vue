@@ -1,7 +1,9 @@
+
+
 const template = `
     <div class="col-10">
         <div class="jumbotron">
-            <h3 class="card-title">欢迎您，系统管理员</h3>
+            <h3 class="card-title">{{welcome}}</h3>
             <div class="card">
                 <!-- 其余页面修改从这里开始直接注释下面的轮播图 -->
                 <!-- 表格标题 -->
@@ -43,4 +45,14 @@ const template = `
 export const HomeWelcome = {
     name: "home-welcome",
     template,
+    inject: ["userinfo"],
+    computed: {
+      welcome() {
+          switch (Number(this.userinfo.type)) {
+              case 0: return "欢迎您，系统管理员"
+              case 1: return "欢迎您，宿舍管理员"
+              default: return "欢迎您，同学"
+          }
+      }
+  },
 };
