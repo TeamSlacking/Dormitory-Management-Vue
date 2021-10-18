@@ -39,7 +39,7 @@ export const AbsenceTableRow = {
                         <option value="">请选择宿舍楼</option>
                         <option v-for="dormitory in dormitories" :value="dormitory">{{ dormitory }}</option>
                     </select>
-                    <span>禁止操作</span>
+                    <span v-else>禁止操作</span>
                 </td>
                 <td>
                     <input v-model="profile.roomId" class="form-control" type="number" style="width: 55px;"/>

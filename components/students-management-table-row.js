@@ -41,10 +41,11 @@ export const StudentsTableRow = {
                     <input v-model="profile.phone" class="form-control" type="number" style="width: 145px;"/>
                 </td>
                 <td>
-                    <select v-model="profile.dormitory" class="form-control" style="width: 122px;">
+                    <select v-if="this.userinfo.type != 1" v-model="profile.dormitory" class="form-control" style="width: 110px;">
                         <option value="">请选择宿舍楼</option>
                         <option v-for="dormitory in dormitories" :value="dormitory">{{ dormitory }}</option>
                     </select>
+                    <span v-else>禁止操作</span>
                 </td>
                 <td><input v-model="profile.roomId" class="form-control" type="text" style="width: 121px;"/></td>
                 <td>
@@ -62,6 +63,7 @@ export const StudentsTableRow = {
             required: true,
         },
     },
+    inject: ["userinfo"],
     data: () => ({
         dormitories, // 宿舍楼列表
         editMode: false, // 显示编辑框
