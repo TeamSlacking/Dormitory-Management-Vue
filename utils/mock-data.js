@@ -28,7 +28,7 @@ export function getDormitoryAdmin() {
 
 /**
  * 
- * @returns {{id: number; scode: string; sname: string; gender: 1 | 2; phone: string; dormitory: string; roomId: number;}[]}
+ * @returns {{id: number; scode: number; sname: string; gender: 1 | 2; phone: string; dormitory: string; roomId: number;}[]}
  */
 
 export function getStudentAdmin() {
