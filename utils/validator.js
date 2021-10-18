@@ -21,7 +21,7 @@ export function validateAdmin({ id, name, gender, phone, dormitory, username }) 
 
 /**
  * 验证学生管理对象数据合法性
- * @param {{id: number; scode:string; sname: string; gender: 1 | 2; phone: string; dormitory: string, roomId: string}} StudentManagement
+ * @param {{id: number; scode:number; sname: string; gender: 1 | 2; phone: string; dormitory: string, roomId: string}} StudentManagement
  */
 export function validateStudentManagement({ id, scode,sname, gender, phone, dormitory, roomId }) {
     if (scode == "") {
