@@ -35,10 +35,11 @@ export const AbsenceTableRow = {
                     <input v-model="profile.sname" class="form-control" type="text" style="width: 50px;"/>
                 </td>
                 <td>
-                    <select v-model="profile.dormitory" class="form-control" style="width: 110px;">
+                    <select v-if="this.userinfo.type != 1" v-model="profile.dormitory" class="form-control" style="width: 110px;">
                         <option value="">请选择宿舍楼</option>
                         <option v-for="dormitory in dormitories" :value="dormitory">{{ dormitory }}</option>
                     </select>
+                    <span>禁止操作</span>
                 </td>
                 <td>
                     <input v-model="profile.roomId" class="form-control" type="number" style="width: 55px;"/>

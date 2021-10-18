@@ -2,6 +2,7 @@ import { AbsenceTableRow } from "./absence-records-table-row.js";
 import { dormitories } from "../utils/dormitories.js";
 import { validateAbsenceRecord } from "../utils/validator.js"
 import { getDormitoryAdmin, getStudentAdmin } from "../utils/mock-data.js";
+import { userType } from "../utils/user-type.js"
 
 /** 空数据 */
 const emptyPerson = {
@@ -147,7 +148,7 @@ export const AbsenceRecords = {
     data: () => ({
         tit: "缺勤记录",
         tittest:"test",
-        dormitories, // 宿舍楼列表
+        
         header: ["序号", "学号", "姓名", "宿舍楼", "寝室", "日期", "备注", "操作"], // 表头
         studHeader: ["序号", "学号", "姓名", "宿舍楼", "寝室", "日期", "备注"], // 学生表头
         data: getStudentAdmin(), // mock.js 生成的数据
@@ -163,6 +164,13 @@ export const AbsenceRecords = {
         },
     }),
     computed: {
+        dormitories() {
+            const { SystemAdmin, DormitoryAdmin, Student } = userType
+            if (this.userinfo.type === String(DormitoryAdmin)) {
+                return [getDormitoryAdmin().find(admin => admin.username === this.userinfo.username).dormitory]
+            }
+            return dormitories
+        }, // 宿舍楼列表
         // 计算总页数
         totalPage() {
             return Math.ceil(this.filteredData.length / this.pageSize) || 1;
