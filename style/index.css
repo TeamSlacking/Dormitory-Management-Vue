@@ -9,11 +9,14 @@ body {
     background-image: url(../img/2.png);
     background-repeat: no-repeat;
     background-size: 100% 100%;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
 }
 
 .index-login-box {
     width: auto;
-    padding-top: 200px;
     display: flex;
     justify-content: center;
 }
