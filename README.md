@@ -1,3 +1,13 @@
+# Dormitory Management 宿舍管理系统
+
+项目实例：https://dormitory-management-vue.pages.dev/
+
+用户名（系统管理员）：admin
+
+密码：123
+
+***
+
 <!-- TOC -->
 
 - [项目结构（参考）](#%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E5%8F%82%E8%80%83)
